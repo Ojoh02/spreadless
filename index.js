@@ -191,7 +191,7 @@ app.post('/api', (request, response) => {
               // await train(model, xs, xsTest, labels, labelsTest);
               // await model.save('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model');
               // console.log('Done first training model');
-              const model = await tf.loadLayersModel('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model/model.json');
+              const model = await tf.loadLayersModel('https://github.com/Ojoh02/spreadless/tree/master/saved_models/model/model.json');
               predictedValue = doPrediction(model, xPredict);
             }
             console.log('Done first prediction');
