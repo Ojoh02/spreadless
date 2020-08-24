@@ -200,6 +200,7 @@ app.post('/api', (request, response) => {
 
               for (let i = 0; i < PIXEL_TOTAL; i++) {
                 // largeModelArray[i] = createModel();
+                console.log(i);
                 largeModelArray[i] = await tf.loadLayersModel(`https://raw.githubusercontent.com/Ojoh02/spreadless/master/saved_models/model${i}/model.json`);
               }
               let dataArray = [predictedValue/10, 0];
