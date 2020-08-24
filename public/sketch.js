@@ -127,7 +127,7 @@ let s1 = function(sketch){
           let downloadTimer;
           submit.onclick = function () {
             if (toggleValue) {
-              let timeLeft = 15;
+              let timeLeft = 30;
               downloadTimer = setInterval(function() {
                 if (timeLeft < 1) {
                   clearInterval(downloadTimer);
@@ -141,7 +141,7 @@ let s1 = function(sketch){
               }, 1000);
               setTimeout(function() {
                 location.href = '/resources';
-              }, 15000);
+              }, 30000);
             }
           }
           submit.textContent = 'Submit';
