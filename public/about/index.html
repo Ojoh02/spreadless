@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>Spread Less</title>
+  <body>
+    <!-- Navigation -->
+    <nav class='navbar navbar-expand-md navbar-dark sticky-top'>
+      <!-- can add sticky-top above^ -->
+      <div class='container-fluid'>
+        <a class='navbar-brand' href='#'><img src='../img/mylogo3.png'></a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse'
+        data-target='#navbarResponsive'>
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div class='collapse navbar-collapse' id='navbarResponsive'>
+          <ul class='navbar-nav ml-auto'>
+            <li class='nav-item'>
+              <a class='nav-link' href='/'>Home</a>
+            </li>
+            <li class='nav-item active'>
+              <a class='nav-link' href='/about'>About</a>
+            </li>
+            <li class='nav-item'>
+              <a id='lock' class='nav-link' href='/learning'>Learning</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--- Image Slider -->
+    <div id='slides' class='carousel slide' data-ride='carousel'>
+    <ul class='carousel-indicators'>
+      <li data-target='#slides' data-slide-to='0' class='active'></li>
+      <li data-target='#slides' data-slide-to='1'></li>
+      <li data-target='#slides' data-slide-to='2'></li>
+    </ul>
+    <div class='carousel-inner'>
+      <div class='carousel-item active'>
+        <img src='../img/mypost.png'>
+        <div class='carousel-caption'>
+          <h1 class='display-2' style="color: #a8feff;">Spread Less</h1>
+          <h3>Be Mindful of Your Cough</h3>
+          <!-- <a href='#can'>
+          <button type='button' class='btn btn-outline-light btn-lg'>
+          VIEW DEMO</button>
+          </a> -->
+        </div>
+      </div>
+      <div class='carousel-item'>
+        <img src='../img/mypost2.png'>
+      </div>
+      <div class='carousel-item'>
+        <img src='../img/mypost3.png'>
+      </div>
+    </div>
+    </div>
+
+    <div class='info container'>
+        <h1 class='cough'>Experimentation Details</h1>
+        <p class='cough'>
+          After becoming intrigued by why we stand 6 feet
+          apart, I began gathering resources together that
+          would help myself and others understand our cough
+          and breath better. A study conducted by Florida
+          Atlantic University was able to use a laser
+          light sheet and a cough simulator to visualize the
+          cough and how a face mask affected it. Using this
+          as inspiriation, I created my own laser light
+          sheet and obtained my own fog machine for
+          experimentation. Instead of a mannequin coughing,
+          however, it would be me. Taking all the necessary
+          safety precautions, a setup was created where
+          I would cough into a concentrated fog box
+          that would then eject a cough in the form of fog.
+          The fog was created using a 3:1 water to glycerin
+          mixture, and the laser light sheet was obtained
+          by using a 532nm green laser and a borosilicate
+          glass rod. The cough was recorded by taking a long
+          exposure image of the cough from above. The entire
+          cough could be seen by using a tripod to put the
+          camera at a high enough point above the vapor.
+          The distance the cough traveled was measured in
+          feet using markers on the ground. The microphone
+          recording the cough was a constant 1.5 feet away
+          from me as to give accurate cough data. Each
+          cough sound FFT was matched with a certain size
+          cough (in terms of density and distance traveled).
+          Over 100 coughs were done and inputed into the
+          database. The algorithmic part of the project
+          that led to the prediction is explained in
+          detail in "The Process" description. A picture
+          of the experimentation is provided below.
+
+          <img src='../img/about.png' class='cough aboutPicture col-lg-5'>
+
+          <h1 class='cough'>The Process</h1>
+          <p class='cough'>
+          Initially, the audio input is converted into a
+          visualization of a Fast Fourier transform (FFT)
+          that a convolutional neural network (CNN) can then
+          use to identify key components of the cough. Once
+          the CNN makes a prediction on a strength (classified
+          between 0 and 9), a multivariable linear regression
+          algorithm predicts the image of the cough. This prediction
+          is based on over a hundred cough images processed into a
+          pixel array with thousands of individual comparisons. In
+          total, the predicted image is created by a machine learning
+          model that has gone through over a million total
+          comparisons. Once the prediction is complete, each individual
+          pixel's HSB color value is used to identify key
+          components of the cough. Values below a certain threshold
+          are cut out to distinguish the cough from the rest of
+          the image, and border pixels were used to calculate the
+          cough's breadth and length. The higher the pixel value,
+          the more dense and larger the particles in that pixel
+          are, which is used to calculate the regions within a cough
+          that are more likely to transmit the virus and/or bacteria.</p>
+
+          <h1 class='cough'>The Accuracy</h1>
+          <p class='cough'>
+          The correlation with the chance of getting the virus is based
+          off of a study by the medical journal The Lancet. The Lancet
+          is known as one of the world's oldest, best-known, and comprehensive
+          peer-reviewed general medical journals. They state
+          "The primary limitation of our study is that
+          all studies were non-randomised, not always fully adjusted, and might
+          suffer from recall and measurement bias (eg, direct contact in some
+          studies might not be measuring near distance). However, unadjusted,
+          adjusted, frequentist, and Bayesian meta-analyses all supported the main findings,
+          and large or very large effects were recorded. Nevertheless, we are cautious
+          not to be overly certain in the precise quantitative estimates of effects,
+          although the qualitative effect and direction is probably of high certainty."
+          Thus, while the data is not perfect by any means, it provides a
+          good baseline to estimate the chance of getting the virus. From their
+          findings, they estimate that within 1 meter in distance between two
+          people, there is around a 13% risk of being infected. This risk decreases
+          greatly at 2 meters and 3 meters away, being in the low single digits.
+          The Lancet provides a useful graph illustrating their findings. My
+          algorithm takes their risk findings and relates it with particle density,
+          with particles about a certain threshold having a specified infection
+          rate. Using the pixel values to evaluate the density, I was able to
+          create an algorithm that matches closely with the research from The Lancet.
+          The algorithm was created so that it recognizes that a person has around a
+          13% infection rate at 1 meter away, and a drastic reduction as the distance
+          increases. I found remarkable similarities between the graphs provided
+          by The Lancet and mine, affirming the idea that density is an adequate
+          method of finding the infection rate of the virus at various distances. </p>
+
+          <p class='cough'>Link to Study:</p>
+          <p class='cough'>
+          thelancet.com/journals/lancet/article/PIIS0140-6736(20)31142-9/fulltext
+          </p>
+          <h1 class='cough'>The Significance</h1>
+          <p class='cough'>
+            Awareness. We need to be aware of our actions
+            and how they can affect other people. While there
+            are countless studies and simulations published by
+            major news sources and large research journals,
+            none can directly impact on an individual level.
+            We may not think we play a large role in the
+            spread of the virus and we may not want to take
+            social distancing rules seriously, but I hope
+            this site can show its importance and answer
+            the question: Why do we stand 6 feet apart?</p>
+            <h1 class='cough'>The Details</h1>
+            <p class='cough'>
+              I am a 17 year old who was looking for something to do over the summer.</p>
+            <p class='cough'>
+              All of the code began from scratch. The website
+              was created using tools from Bootstrap and JQuery without the
+              usage of pre-made templates. Javscript, CSS, and HTML
+              were used to construct the website. The machine
+              learning was coded using Tensorflow.js without the
+              use of pre-existing models. All of the over one thousand
+              models were created from my algorithm. I learned
+              the optimal machine learning algorithm by testing
+              MNIST data. p5.js was used for the Fast Fourier transform
+              canvas. Node.js was used for server-side programming,
+              alongside Express.js. The NeDB node package manager was
+              used to create a database to hold all the cough data.
+              Lastly, Chart.js was used to create the charts shown
+              throughout the site.
+            </p>
+            <p class='cough'>
+              Project Hours Over the Summer: 106 Hours</p>
+            <p class='cough'>
+              Experimentation Hours: 21 Hours</p>
+            <p class='cough'>
+              Project Hours During School: 158 Hours</p>
+            <p class='cough'>
+              Learning Hours: 70 Hours</p>
+            <p class='cough'>
+              Total Hours : 355 Hours</p>
+
+            <h1 class='cough'>Credit</h1>
+            <p class='cough'>
+              The Fluid Simulator utilized much of the code from Pavel Dobryakov's
+              fluid simulation, but was optimized to match with the approximate
+              size, shape, and strength of a specified cough provided by the user.
+              Credit goes to him for creating the simulation.</p>
+            <p class='cough'>Copyright (c) 2020 by Pavel Dobryakov (https://codepen.io/PavelDoGreat/pen/zdWzEL)</p>
+
+            <p class='cough'>
+              Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+            </p>
+    </div>
+
+  </body>
+</html>
