@@ -200,7 +200,7 @@ app.post('/api', (request, response) => {
 
               for (let i = 0; i < PIXEL_TOTAL; i++) {
                 // largeModelArray[i] = createModel();
-                largeModelArray[i] = await tf.loadLayersModel(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}/model.json`);
+                largeModelArray[i] = await tf.loadLayersModel(`https://github.com/Ojoh02/spreadless/tree/master/saved_models/model${i}/model.json`);
               }
               let dataArray = [predictedValue/10, 0];
               const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
