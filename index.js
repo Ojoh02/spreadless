@@ -191,7 +191,7 @@ app.post('/api', (request, response) => {
               // await train(model, xs, xsTest, labels, labelsTest);
               // await model.save('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model');
               // console.log('Done first training model');
-              const model = await tf.loadLayersModel('https://github.com/Ojoh02/spreadless/tree/2cbece774f53383557242e8f2e120b8e0517166b/saved_models/model/model.json');
+              const model = await tf.loadLayersModel('saved_models/model/model.json');
               predictedValue = doPrediction(model, xPredict);
             }
             console.log('Done first prediction');
@@ -200,7 +200,7 @@ app.post('/api', (request, response) => {
 
               for (let i = 0; i < PIXEL_TOTAL; i++) {
                 // largeModelArray[i] = createModel();
-                largeModelArray[i] = await tf.loadLayersModel(`https://github.com/Ojoh02/spreadless/tree/2cbece774f53383557242e8f2e120b8e0517166b/saved_models/model${i}/model.json`);
+                largeModelArray[i] = await tf.loadLayersModel(`saved_models/model${i}/model.json`);
               }
               let dataArray = [predictedValue/10, 0];
               const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
