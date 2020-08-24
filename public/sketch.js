@@ -141,7 +141,7 @@ let s1 = function(sketch){
               }, 1000);
               setTimeout(function() {
                 location.href = '/resources';
-              }, 15000);
+              }, 30000);
             }
           }
           submit.textContent = 'Submit';
