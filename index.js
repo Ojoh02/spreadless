@@ -168,7 +168,6 @@ app.post('/api', (request, response) => {
               resolve(data);
             });
           }).then((dataReceive3) => {
-            getDataTest(dataReceive3);
             const xsTest = tf.tensor2d(batchImagesArrayTest, [databaseSizeTest, IMAGE_SIZE]);
             //console.log(xsTest);
             console.log(2);
