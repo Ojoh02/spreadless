@@ -103,6 +103,17 @@ function getDataTest(data) {
   }
 }
 
+function getPictures(predictions, dataReceive4) {
+  pixelArray = [];
+  for (item of dataReceive4) {
+    if (predictions == item.corrects[0]) {
+      for (let i = 0; i < PIXEL_TOTAL; i++) {
+        pixelArray[i] = item.newArray[i];
+      }
+    }
+  }
+}
+
 app.post('/api', (request, response) => {
     const data = request.body;
     importantData = data.f32array;
@@ -196,31 +207,39 @@ app.post('/api', (request, response) => {
             }
             console.log('Done first prediction');
             async function run2() {
-              console.log(predictedValue);
+              let c = new Promise((resolve, reject) => {
+                database.find({}, function (err, data) {
+                  if (err) throw err;
+                  resolve(data);
+                });
+              }).then((dataReceive4) => {
+                getPictures(predictedValue, dataReceive4);
+                console.log('Done second prediction');
+              });
+//               console.log(predictedValue);
 
-              for (let i = 0; i < PIXEL_TOTAL; i++) {
-                // largeModelArray[i] = createModel();
-                console.log(i);
-                largeModelArray[i] = await tf.loadLayersModel(`https://storage.googleapis.com/spreadless/saved_models/model${i}/model.json`);
-              }
-              let dataArray = [predictedValue/10, 0];
-              const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
+//               for (let i = 0; i < PIXEL_TOTAL; i++) {
+//                 // largeModelArray[i] = createModel();
+//                 console.log(i);
+//                 largeModelArray[i] = await tf.loadLayersModel(`https://storage.googleapis.com/spreadless/saved_models/model${i}/model.json`);
+//               }
+//               let dataArray = [predictedValue/10, 0];
+//               const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
 
-              for (let i = 0; i < PIXEL_TOTAL; i++) {
-                // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
-              }
+//               for (let i = 0; i < PIXEL_TOTAL; i++) {
+//                 // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
+//               }
 
-              // console.log('Done second training model')
-              // for (let i = 0; i < PIXEL_TOTAL; i++) {
-              //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
-              // }
-              pixelArray = [];
-              for (let i = 0; i < PIXEL_TOTAL; i++) {
-                largeDataArray[i] = testModel(largeModelArray[i], dataTest);
-                pixelArray.push(largeDataArray[i]);
-              }
+//               // console.log('Done second training model')
+//               // for (let i = 0; i < PIXEL_TOTAL; i++) {
+//               //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
+//               // }
+//               pixelArray = [];
+//               for (let i = 0; i < PIXEL_TOTAL; i++) {
+//                 largeDataArray[i] = testModel(largeModelArray[i], dataTest);
+//                 pixelArray.push(largeDataArray[i]);
+//               }
 
-              console.log('Done second prediction');
               // console.log(pixelArray);
             }
           })
