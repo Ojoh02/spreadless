@@ -50,48 +50,6 @@ th5.oninput = function () {
   t5 = this.value;
 }
 
-submitting.addEventListener('click', async event => {
-  if (t1 == '' || t2 == '' || t3 == '' || t4 == '' || t5 == '') {
-    alert('Please fill out all areas!');
-  } else {
-    let ref2 = database.ref('feedback');
-    let dataFeedback = {
-      accuracy: t1,
-      belief: t2,
-      helpful: t3,
-      age: t4,
-      location: t5
-    }
-    ref2.push(dataFeedback);
-
-    there1.style.display = 'none';
-    t_1.style.display = 'none';
-    th1.style.display = 'none';
-
-    there2.style.display = 'none';
-    t_2.style.display = 'none';
-    th2.style.display = 'none';
-
-    there3.style.display = 'none';
-    t_3.style.display = 'none';
-    th3.style.display = 'none';
-
-    there4.style.display = 'none';
-    t_4.style.display = 'none';
-    th4.style.display = 'none';
-
-    there5.style.display = 'none';
-    th5.style.display = 'none';
-
-    submitting.style.display = 'none';
-
-    const para = document.createElement('p');
-    para.innerHTML = 'Thanks for your feedback!';
-    span.appendChild(para);
-    }
-  }
-);
-
 async function getData() {
   const response = await fetch('/collect');
   const data = await response.json();
@@ -120,6 +78,48 @@ let s1 = async function(sketch) {
     firebase.initializeApp(firebaseConfig);
 
     let database = firebase.database();
+
+    submitting.addEventListener('click', async event => {
+      if (t1 == '' || t2 == '' || t3 == '' || t4 == '' || t5 == '') {
+        alert('Please fill out all areas!');
+      } else {
+        let ref2 = database.ref('feedback');
+        let dataFeedback = {
+          accuracy: t1,
+          belief: t2,
+          helpful: t3,
+          age: t4,
+          location: t5
+        }
+        ref2.push(dataFeedback);
+
+        there1.style.display = 'none';
+        t_1.style.display = 'none';
+        th1.style.display = 'none';
+
+        there2.style.display = 'none';
+        t_2.style.display = 'none';
+        th2.style.display = 'none';
+
+        there3.style.display = 'none';
+        t_3.style.display = 'none';
+        th3.style.display = 'none';
+
+        there4.style.display = 'none';
+        t_4.style.display = 'none';
+        th4.style.display = 'none';
+
+        there5.style.display = 'none';
+        th5.style.display = 'none';
+
+        submitting.style.display = 'none';
+
+        const para = document.createElement('p');
+        para.innerHTML = 'Thanks for your feedback!';
+        span.appendChild(para);
+        }
+      }
+    );
 
     newArray = datas.pixelArray;
     b1 = datas.perc2;
