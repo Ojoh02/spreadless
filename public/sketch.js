@@ -97,7 +97,7 @@ let s1 = function(sketch){
     canvas1.id('canvas1');
     cHeight = windowHeight/2;
     cWidth = windowWidth/2-73;
-    console.log(cWidth);
+    // console.log(cWidth);
     // cHeight = canvas1.height;
     // cWidth = canvas1.width;
     size = cWidth * cHeight * 4;
@@ -329,7 +329,7 @@ function capture() {
       let c2 = document.createElement('canvas');
       ctx2 = c2.getContext('2d');
       c2.width = cWidth;
-      console.log(c2.width);
+      // console.log(c2.width);
       c2.height = cHeight;
       let i = 0;
       let j;
