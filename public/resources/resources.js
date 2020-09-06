@@ -19,16 +19,7 @@ let total = 0;
 
 let b1, b2, b3, b4, b5
 
-let firebaseConfig = {
-    apiKey: "AIzaSyD6xCr-JvHbd8JA8R0YvewHML_qeHQ2deU",
-    authDomain: "spreadless-5e858.firebaseapp.com",
-    databaseURL: "https://spreadless-5e858.firebaseio.com",
-    projectId: "spreadless-5e858",
-    storageBucket: "spreadless-5e858.appspot.com",
-    messagingSenderId: "656956132180",
-    appId: "1:656956132180:web:4344bfaf3e9a1333e956c1",
-    measurementId: "G-1TYS1WCBMP"
-};
+let firebaseConfig = FIREBASE_CONFIG;
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
