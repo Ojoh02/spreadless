@@ -17,10 +17,14 @@ const db = new Datastore('db.db');
 db.loadDatabase();
 
 const survey = new Datastore('survey.db');
-survey.loadDatabase();
+survey.loadDatabase(function(err) {
+  console.log(err);
+});
 
 const feedback = new Datastore('feedback.db');
-feedback.loadDatabase();
+feedback.loadDatabase(function(err) {
+  console.log(err);
+});
 
 app.post('/collect', (request, response) => {
   const data = request.body;
