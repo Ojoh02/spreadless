@@ -1,5 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
+require('dotenv').config();
 
 const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
