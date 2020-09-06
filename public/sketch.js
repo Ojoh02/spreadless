@@ -36,7 +36,7 @@ let option6 = document.getElementById('input6');
 
 let percent2 = '', percent3 = '', percent4 = '', percent5 = '', p6 = '';
 
-let firebaseConfig = FIREBASE_CONFIG;
+let firebaseConfig = process.env.FIREBASE_CONFIG;
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

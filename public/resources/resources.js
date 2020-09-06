@@ -19,7 +19,7 @@ let total = 0;
 
 let b1, b2, b3, b4, b5
 
-let firebaseConfig = FIREBASE_CONFIG;
+let firebaseConfig = process.env.FIREBASE_CONFIG;
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
