@@ -16,16 +16,6 @@ database.loadDatabase();
 const db = new Datastore('db.db');
 db.loadDatabase();
 
-const survey = new Datastore({filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/survey.db'});
-survey.loadDatabase(function(err) {
-  console.log(err);
-});
-
-const feedback = new Datastore({filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/feedback.db'});
-feedback.loadDatabase(function(err) {
-  console.log(err);
-});
-
 app.post('/collect', (request, response) => {
   const data = request.body;
   const timestamp = Date.now();
@@ -130,11 +120,6 @@ function getPictures(predictions, dataReceive4) {
 app.post('/api', (request, response) => {
     const data = request.body;
     importantData = data.f32array;
-    perc2 = data.percent2;
-    perc3 = data.percent3;
-    perc4 = data.percent4;
-    perc5 = data.percent5;
-    perc6 = data.p6;
     let y = new Promise((resolve, reject) => {
       db.count({}, function(err, count) {
         if (err) throw err;
@@ -234,11 +219,6 @@ app.post('/api', (request, response) => {
               }).then((dataReceive4) => {
                 getPictures(predictedValue, dataReceive4);
                 console.log('Done second prediction');
-
-                const data2 = {predictedValue, perc2, perc3, perc4, perc5, perc6};
-                const timestamp = Date.now();
-                data2.timestamp = timestamp;
-                survey.insert(data2);
               });
               // for (let i = 0; i < PIXEL_TOTAL; i++) {
               //   // largeModelArray[i] = createModel();
