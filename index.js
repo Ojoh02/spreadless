@@ -120,6 +120,11 @@ function getPictures(predictions, dataReceive4) {
 app.post('/api', (request, response) => {
     const data = request.body;
     importantData = data.f32array;
+    perc2 = data.percent2;
+    perc3 = data.percent3;
+    perc4 = data.percent4;
+    perc5 = data.percent5;
+    perc6 = data.p6;
     response.json(data);
     let y = new Promise((resolve, reject) => {
       db.count({}, function(err, count) {
@@ -262,6 +267,11 @@ app.get('/collect', (request, response) => {
       pixelArray: pixelArray,
       predictedValue: predictedValue,
       correctOne: predictedValue,
+      perc2: perc2,
+      perc3: perc3,
+      perc4: perc4,
+      perc5: perc5,
+      perc6: perc6
     }
     response.json(data);
 });
