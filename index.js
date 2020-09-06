@@ -1,11 +1,12 @@
 const express = require('express');
+const fetch = require('node-fetch');
+
 const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
-//import {MnistData} from './batches.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('listening at 3000'));
+app.listen(port, () => console.log('listening...'));
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb'}));
 
@@ -14,6 +15,12 @@ database.loadDatabase();
 
 const db = new Datastore('db.db');
 db.loadDatabase();
+
+const survey = new Datastore('survey.db');
+survey.loadDatabase();
+
+const feedback = new Datastore('feedback.db');
+feedback.loadDatabase();
 
 app.post('/collect', (request, response) => {
   const data = request.body;
@@ -48,6 +55,8 @@ let largeArray = [];
 let largeTensorArray = [];
 let largeModelArray = [];
 let largeDataArray = [];
+
+let perc2, perc3, perc4, perc5, perc6;
 
 let predictedValue;
 let correctOne;
@@ -117,6 +126,11 @@ function getPictures(predictions, dataReceive4) {
 app.post('/api', (request, response) => {
     const data = request.body;
     importantData = data.f32array;
+    perc2 = data.percent2;
+    perc3 = data.percent3;
+    perc4 = data.percent4;
+    perc5 = data.percent5;
+    perc6 = data.p6;
     let y = new Promise((resolve, reject) => {
       db.count({}, function(err, count) {
         if (err) throw err;
@@ -168,6 +182,7 @@ app.post('/api', (request, response) => {
               resolve(data);
             });
           }).then((dataReceive3) => {
+            // getDataTest(dataReceive3);
             const xsTest = tf.tensor2d(batchImagesArrayTest, [databaseSizeTest, IMAGE_SIZE]);
             //console.log(xsTest);
             console.log(2);
@@ -201,6 +216,7 @@ app.post('/api', (request, response) => {
               // await train(model, xs, xsTest, labels, labelsTest);
               // await model.save('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model');
               // console.log('Done first training model');
+
               const model = await tf.loadLayersModel('https://raw.githubusercontent.com/Ojoh02/spreadless/master/saved_models/model/model.json');
               predictedValue = doPrediction(model, xPredict);
             }
@@ -214,30 +230,33 @@ app.post('/api', (request, response) => {
               }).then((dataReceive4) => {
                 getPictures(predictedValue, dataReceive4);
                 console.log('Done second prediction');
+
+                const data2 = {predictedValue, perc2, perc3, perc4, perc5, perc6};
+                const timestamp = Date.now();
+                data2.timestamp = timestamp;
+                survey.insert(data2);
               });
-//               console.log(predictedValue);
-
-//               for (let i = 0; i < PIXEL_TOTAL; i++) {
-//                 // largeModelArray[i] = createModel();
-//                 console.log(i);
-//                 largeModelArray[i] = await tf.loadLayersModel(`https://storage.googleapis.com/spreadless/saved_models/model${i}/model.json`);
-//               }
-//               let dataArray = [predictedValue/10, 0];
-//               const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
-
-//               for (let i = 0; i < PIXEL_TOTAL; i++) {
-//                 // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
-//               }
-
-//               // console.log('Done second training model')
-//               // for (let i = 0; i < PIXEL_TOTAL; i++) {
-//               //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
-//               // }
-//               pixelArray = [];
-//               for (let i = 0; i < PIXEL_TOTAL; i++) {
-//                 largeDataArray[i] = testModel(largeModelArray[i], dataTest);
-//                 pixelArray.push(largeDataArray[i]);
-//               }
+              // for (let i = 0; i < PIXEL_TOTAL; i++) {
+              //   // largeModelArray[i] = createModel();
+              //   largeModelArray[i] = await tf.loadLayersModel(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}/model.json`);
+              // }
+              //
+              // let dataArray = [predictedValue/10, 0];
+              // const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
+              //
+              // for (let i = 0; i < PIXEL_TOTAL; i++) {
+              //   // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
+              // }
+              //
+              // // console.log('Done second training model')
+              // // for (let i = 0; i < PIXEL_TOTAL; i++) {
+              // //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
+              // // }
+              // pixelArray = [];
+              // for (let i = 0; i < PIXEL_TOTAL; i++) {
+              //   largeDataArray[i] = testModel(largeModelArray[i], dataTest);
+              //   pixelArray.push(largeDataArray[i]);
+              // }
 
               // console.log(pixelArray);
             }
@@ -273,13 +292,21 @@ app.get('/api', (request, response) => {
 });
 
 
-// app.post('/api', (request, response) => {
-//   const data = request.body;
-//   const timestamp = Date.now();
-//   data.timestamp = timestamp;
-//   database.insert(data);
-//   response.json(data);
-// });
+app.post('/pics', (request, response) => {
+  const data = request.body;
+  const timestamp = Date.now();
+  data.timestamp = timestamp;
+  database.insert(data);
+  response.json(data);
+});
+
+app.post('/feedback', (request, response) => {
+  const data = request.body;
+  const timestamp = Date.now();
+  data.timestamp = timestamp;
+  feedback.insert(data);
+  response.json(data);
+});
 
 //***********************************************************************
 
@@ -416,7 +443,6 @@ async function train(model, xs, xsTest, labels, labelsTest) {
     validationData: [testXs, testYs],
     epochs: 50,
     shuffle: true,
-    //callbacks: fitCallbacks ** add callbacks later
   });
 }
 
@@ -424,7 +450,7 @@ async function train(model, xs, xsTest, labels, labelsTest) {
 
 function doPrediction(model, xPredict) {
   const xReady = xPredict.reshape([1, 32, 32, 1]);
-  const preds = model.predict(xReady).argMax(-1);
+  const preds = model.predict(xReady).argMax(-1).add(1);
   console.log("Prediction: " + preds.dataSync());
   return preds.dataSync();
 }
