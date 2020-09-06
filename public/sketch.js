@@ -49,6 +49,8 @@ let firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+let database = firebase.database();
+
 function labelLabels(labeler) {
   if (labeler == '1') {
     label9 = [1,0,0,0,0,0,0,0,0,0];
@@ -400,8 +402,18 @@ function capture() {
               labelBytesView[i] = label9[i];
             }
             //const images = createImg(img4.src, 'img4');
-            // lat lon converted to wind speed, temperature, humidity
-            const data = {f32array, percent2, percent3, percent4, percent5, p6};
+            
+            let ref = database.ref('survey');
+
+            let fireData = {
+                feet3: percent2,
+                feet6: percent3,
+                feet9: percent4,
+                age: percent5,
+                location: p6
+            }
+            ref.push(fireData);
+            const data = {f32array};
             //console.log(data);
             const options = {
               method: 'POST',
