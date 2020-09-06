@@ -106,7 +106,7 @@ let s1 = async function(sketch) {
     sketch.createCanvas(480, 400);
     sketch.colorMode(sketch.HSB);
     datas = await getData();
-    let firebaseConfig = datas.firebaseConfig;
+    let firebaseConfig = datas.fire;
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
