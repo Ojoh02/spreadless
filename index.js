@@ -5,10 +5,8 @@ require('dotenv').config();
 const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
 
-console.log(process.env.FIREBASE_CONFIG);
-let firebaseConfig = process.env.FIREBASE_CONFIG;
-
 const app = express();
+console.log(process.env);
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('listening...'));
 app.use(express.static('public'));
@@ -276,8 +274,16 @@ app.get('/collect', (request, response) => {
       perc4: perc4,
       perc5: perc5,
       perc6: perc6,
-      fire: firebaseConfig
+      apiKey: apiKey,
+      authDomain: authDomain,
+      databaseURL: databaseURL,
+      projectId: projectId,
+      storageBucket: storageBucket,
+      messagingSenderId: messagingSenderId,
+      appId: appId,
+      measurementId: measurementId
     }
+    console.log(data);
     response.json(data);
 });
 

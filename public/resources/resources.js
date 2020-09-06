@@ -106,12 +106,22 @@ let s1 = async function(sketch) {
     sketch.createCanvas(480, 400);
     sketch.colorMode(sketch.HSB);
     datas = await getData();
-    let firebaseConfig = datas.fire;
-    console.log(datas.fire);
+    let firebaseConfig = {
+      apiKey: datas.apiKey,
+      authDomain: datas.authDomain,
+      databaseURL: datas.databaseURL,
+      projectId: datas.projectId,
+      storageBucket: datas.storageBucket,
+      messagingSenderId: datas.messagingSenderId,
+      appId: datas.appId,
+      measurementId: datas.measurementId
+    }
+    console.log(firebaseConfig);
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     let database = firebase.database();
+
     newArray = datas.pixelArray;
     b1 = datas.perc2;
     b2 = datas.perc3;
@@ -259,7 +269,7 @@ let s1 = async function(sketch) {
         findMin = densityMax/avgNumber;
       }
     }
-    console.log(largeArray);
+    // console.log(largeArray);
     for (let i = 0; i < largeArray.length; i++) {
       densityMax = 0;
       avgNumber = 0;
