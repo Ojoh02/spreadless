@@ -17,6 +17,8 @@ let graph6 = [];
 let feet3, feet6, feet9;
 let total = 0;
 
+let b1, b2, b3, b4, b5
+
 let firebaseConfig = {
     apiKey: "AIzaSyD6xCr-JvHbd8JA8R0YvewHML_qeHQ2deU",
     authDomain: "spreadless-5e858.firebaseapp.com",
@@ -120,6 +122,11 @@ let s1 = async function(sketch) {
     sketch.colorMode(sketch.HSB);
     datas = await getData();
     newArray = datas.pixelArray;
+    b1 = datas.perc2;
+    b2 = datas.perc3;
+    b3 = datas.perc4;
+    b4 = datas.perc5;
+    b5 = datas.perc6;
     // corrects = datas.correctOne;
     // const data = {corrects, newArray};
     // //console.log(data);
@@ -625,7 +632,15 @@ let s1 = async function(sketch) {
     coughStrength.innerHTML = `Your Cough Strength (1 to 10): ${coughNum}`;
     let ref = database.ref('index');
     let dataIndex = {
-      coughStrength: coughNum
+      feet3: b1,
+      feet6: b2,
+      feet9: b3,
+      age: b4,
+      location: b5,
+      coughStrength: coughNum,
+      rfeet3: record3_5,
+      rfeet6: record6_5,
+      rfeet9: record9_5
     }
     ref.push(dataIndex);
     let coughData1 = document.getElementById('coughData1');
