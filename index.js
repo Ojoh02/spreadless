@@ -4,23 +4,15 @@ require('dotenv').config();
 
 const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
-
-let apiKey = process.env.apiKey;
-let authDomain = process.env.authDomain;
-let databaseURL = process.env.databaseURL;
-let projectId = process.env.projectId;
-let storageBucket = process.env.storageBucket;
-let messagingSenderId = process.env.messagingSenderId;
-let appId = process.env.appId;
-let measurementId = process.env.measurementId;
-console.log(apiKey);
-console.log(authDomain);
-console.log(databaseURL);
-console.log(projectId);
-console.log(storageBucket);
-console.log(messagingSenderId);
-console.log(appId);
-console.log(measurementId);
+console.log(process.env);
+let apiKey = process.env.API_KEY;
+let authDomain = process.env.AUTH_DOMAIN;
+let databaseURL = process.env.DATABASE_URL;
+let projectId = process.env.PROJECT_ID;
+let storageBucket = process.env.STORAGE_BUCKET;
+let messagingSenderId = process.env.MESSAGING_SENDER_ID;
+let appId = process.env.APP_ID;
+let measurementId = process.env.MEASUREMENT_ID;
 
 const app = express();
 const port = process.env.PORT || 3000;
