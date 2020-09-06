@@ -116,7 +116,6 @@ let s1 = async function(sketch) {
       appId: datas.appId,
       measurementId: datas.measurementId
     }
-    console.log(firebaseConfig);
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
