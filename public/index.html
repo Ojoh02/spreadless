@@ -86,9 +86,138 @@
         accurate visualization of your own cough and tons of
         data about it, including your chance of infecting
         others at different distances if you have the virus!</p>
+
         <button id='toggle' class='starter btn btn-outline-secondary' data-toggle='collapse' data-target='#emoji'>
         Start</button>
     </a>
+      <div id='onOff2' class='percent'>
+        <div class='selection'>
+          <select name='percent' id='percent2'>
+            <option disabled selected value>Select</option>
+            <option>1%</option>
+            <option>2%</option>
+            <option>3%</option>
+            <option>4%</option>
+            <option>5%</option>
+            <option>6%</option>
+            <option>7%</option>
+            <option>8%</option>
+            <option>9%</option>
+            <option>10%</option>
+            <option>11%</option>
+            <option>12%</option>
+            <option>13%</option>
+            <option>14%</option>
+            <option>15%</option>
+            <option>20%</option>
+            <option>25%</option>
+            <option>30%</option>
+            <option>40%</option>
+            <option>50%</option>
+            <option>60%</option>
+            <option>70%</option>
+            <option>80%</option>
+            <option>90%</option>
+            <option>100%</option>
+          </select>
+        </div>
+       </div>
+       <div id='onOff3' class='percent'>
+         <div class='selection'>
+           <select name='percent' id='percent3'>
+             <option disabled selected value>Select</option>
+             <option>1%</option>
+             <option>2%</option>
+             <option>3%</option>
+             <option>4%</option>
+             <option>5%</option>
+             <option>6%</option>
+             <option>7%</option>
+             <option>8%</option>
+             <option>9%</option>
+             <option>10%</option>
+             <option>11%</option>
+             <option>12%</option>
+             <option>13%</option>
+             <option>14%</option>
+             <option>15%</option>
+             <option>20%</option>
+             <option>25%</option>
+             <option>30%</option>
+             <option>40%</option>
+             <option>50%</option>
+             <option>60%</option>
+             <option>70%</option>
+             <option>80%</option>
+             <option>90%</option>
+             <option>100%</option>
+           </select>
+         </div>
+        </div>
+        <div id='onOff4' class='percent'>
+          <div class='selection'>
+            <select name='percent' id='percent4'>
+              <option disabled selected value>Select</option>
+              <option>1%</option>
+              <option>2%</option>
+              <option>3%</option>
+              <option>4%</option>
+              <option>5%</option>
+              <option>6%</option>
+              <option>7%</option>
+              <option>8%</option>
+              <option>9%</option>
+              <option>10%</option>
+              <option>11%</option>
+              <option>12%</option>
+              <option>13%</option>
+              <option>14%</option>
+              <option>15%</option>
+              <option>20%</option>
+              <option>25%</option>
+              <option>30%</option>
+              <option>40%</option>
+              <option>50%</option>
+              <option>60%</option>
+              <option>70%</option>
+              <option>80%</option>
+              <option>90%</option>
+              <option>100%</option>
+            </select>
+          </div>
+         </div>
+         <div id='onOff5' class='percent'>
+           <div class='selection'>
+             <select name='percent' id='percent5'>
+               <option disabled selected value>Select</option>
+               <option>0-10</option>
+               <option>10-20</option>
+               <option>20-30</option>
+               <option>40-50</option>
+               <option>60-70+</option>
+             </select>
+           </div>
+          </div>
+          <form>
+            <input type='text' id='input6'>
+          </form>
+      <h3 id='here0' class='cough'>Prediction Survey</h3>
+      <p id='here1'>If you were infected, what is the chance of your breathe, cough, or sneeze...</p>
+      <p id='here2'>...spreading the virus at 3 feet?</p>
+      <p id='here3'>...spreading the virus at 6 feet?</p>
+      <p id='here4'>...spreading the virus at 9 feet?</p>
+      <p id='here5'>Your Age Group:</p>
+      <p id='here6'>Your state within the United States or your country outside of the US:</p>
+      <script>
+        for (let i = 0; i <= 6; i++) {
+          document.getElementById(`here${i}`).style.display='none';
+        }
+        for (let i = 2; i <= 5; i++) {
+          document.getElementById(`onOff${i}`).style.display='none';
+        }
+        document.getElementById('input6').style.display='none';
+      </script>
+
       <span id='moreContent'></span>
 
       <span id='mainContent'></span>
@@ -99,23 +228,13 @@
     </div>
     <div class='info container'>
         <h1 class='cough'>Cough Info</h1>
-        <p class='cough'>These 4 graphs illustrate the trends
+        <p class='cough'>This graph illustrates the density trend
           identified in the cough algorithm. "Cough strength"
           is measured by the size and shape of your audio input.
-          The chance of getting the virus was found by comparing
-          data from scientific studies with the different components
-          of the cough.</p>
-        <div class='chart10'>
+          Read below and the 'About' page for more.
+        </p>
+        <div class='chart10_2'>
           <canvas id="myChart10" width="200" height="200"></canvas>
-        </div>
-        <div class='chart11'>
-          <canvas id="myChart11" width="200" height="200"></canvas>
-        </div>
-        <div class='chart12'>
-          <canvas id="myChart12" width="200" height="200"></canvas>
-        </div>
-        <div class='chart13'>
-          <canvas id="myChart13" width="200" height="200"></canvas>
         </div>
         <h1 class='cough'></h1>
         <h1 class='cough'></h1>
@@ -155,21 +274,8 @@
             social distancing rules seriously, but I hope
             this site can show its importance and answer
             the question: Why do we stand 6 feet apart?</p>
-    </div>
     <script src="demo.js"></script>
     <script src="sketch.js"></script>
-
-
-
-
-    <!-- <div><a href='/'>enter</a> | <a href='/logs'>list</a> | <a href='/record'>record</a></div> -->
-    <!-- <img id='image2' src='image2.jpg' /> -->
-
-    <!-- <p>
-      latitude: <span id='latitude'></span>&deg;<br />
-      longitude: <span id='longitude'></span>&deg;
-    </p> -->
-
 
   </body>
 </html>
