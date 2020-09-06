@@ -120,6 +120,7 @@ function getPictures(predictions, dataReceive4) {
 app.post('/api', (request, response) => {
     const data = request.body;
     importantData = data.f32array;
+    response.json(data);
     let y = new Promise((resolve, reject) => {
       db.count({}, function(err, count) {
         if (err) throw err;
