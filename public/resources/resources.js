@@ -638,9 +638,9 @@ let s1 = async function(sketch) {
       age: b4,
       location: b5,
       coughStrength: coughNum,
-      rfeet3: record3_5,
-      rfeet6: record6_5,
-      rfeet9: record9_5
+      rfeet3: feet3,
+      rfeet6: feet6,
+      rfeet9: feet9
     }
     ref.push(data);
     let coughData1 = document.getElementById('coughData1');
