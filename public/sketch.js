@@ -403,17 +403,7 @@ function capture() {
             }
             //const images = createImg(img4.src, 'img4');
             
-            let ref = database.ref('survey');
-
-            let fireData = {
-                feet3: percent2,
-                feet6: percent3,
-                feet9: percent4,
-                age: percent5,
-                location: p6
-            }
-            ref.push(fireData);
-            const data = {f32array};
+            const data = {f32array, percent2, percent3, percent4, percent5, p6};
             //console.log(data);
             const options = {
               method: 'POST',
