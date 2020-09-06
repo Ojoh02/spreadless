@@ -36,12 +36,6 @@ let option6 = document.getElementById('input6');
 
 let percent2 = '', percent3 = '', percent4 = '', percent5 = '', p6 = '';
 
-let firebaseConfig = process.env.FIREBASE_CONFIG;
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-let database = firebase.database();
-
 function labelLabels(labeler) {
   if (labeler == '1') {
     label9 = [1,0,0,0,0,0,0,0,0,0];

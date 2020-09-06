@@ -19,12 +19,6 @@ let total = 0;
 
 let b1, b2, b3, b4, b5
 
-let firebaseConfig = process.env.FIREBASE_CONFIG;
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-let database = firebase.database();
-
 let t1 = '', t2 = '', t3 = '', t4 = '', t5 = '';
 const submitting = document.getElementById('submitting');
 const span = document.getElementById('span');
@@ -112,6 +106,11 @@ let s1 = async function(sketch) {
     sketch.createCanvas(480, 400);
     sketch.colorMode(sketch.HSB);
     datas = await getData();
+    let firebaseConfig = datas.firebaseConfig;
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    let database = firebase.database();
     newArray = datas.pixelArray;
     b1 = datas.perc2;
     b2 = datas.perc3;
