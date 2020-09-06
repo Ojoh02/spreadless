@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
-console.log(process.env);
+
 let apiKey = process.env.API_KEY;
 let authDomain = process.env.AUTH_DOMAIN;
 let databaseURL = process.env.DATABASE_URL;
@@ -153,7 +153,6 @@ app.post('/api', (request, response) => {
         });
       }).then((dataReceive) => {
         getData(dataReceive);
-        console.log(1);
         const xs = tf.tensor2d(batchImagesArray, [databaseSize, IMAGE_SIZE]);
         //console.log(xs);
         //console.log(batchImagesArray);
@@ -190,7 +189,6 @@ app.post('/api', (request, response) => {
             // getDataTest(dataReceive3);
             const xsTest = tf.tensor2d(batchImagesArrayTest, [databaseSizeTest, IMAGE_SIZE]);
             //console.log(xsTest);
-            console.log(2);
             let predictImagesArray = [];
             for (let i = 0; i < IMAGE_SIZE; i++) {
               predictImagesArray[i] = importantData[i];
@@ -291,7 +289,6 @@ app.get('/collect', (request, response) => {
       appId: appId,
       measurementId: measurementId
     }
-    console.log(data);
     response.json(data);
 });
 
