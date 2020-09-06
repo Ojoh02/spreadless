@@ -6,11 +6,11 @@ const Datastore = require('nedb');
 const tf = require('@tensorflow/tfjs-node');
 
 const app = express();
-console.log(process.env);
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('listening...'));
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb'}));
+console.log(process.env);
 
 const database = new Datastore('database.db');
 database.loadDatabase();
