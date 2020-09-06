@@ -129,8 +129,40 @@ html, body {
   padding-right: 1rem;
   margin-bottom: 2rem;
   margin-top: .6rem;
-  float: left;
-  color:#34eb89;
+  margin-left: 43%;
+  color:#000;
+  background-color: #1df024;
+  border-color: #1df024;
+}
+.starter:hover {
+  color:#000;
+  background-color: #18c71e;
+  border-color: #18c71e;
+}
+.starter:active {
+  color:#000;
+  background-color: #18c71e;
+  border-color: #18c71e;
+}
+.sub {
+  /* width: 100%;
+  height: 50px; */
+  display: block;
+  /* margin-right: auto;
+  margin-left: auto; */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 2rem;
+  margin-top: .6rem;
+  margin-left: 43%;
+  color:#000;
+  background-color: #00f5f1;
+  border-color: #00f5f1;
+}
+.sub:hover {
+  color:#000;
+  background-color: #039492;
+  border-color: #039492;
 }
 .starter2 {
   /* width: 100%;
@@ -140,8 +172,39 @@ html, body {
   margin-left: auto; */
   padding-left: 1rem;
   padding-right: 1rem;
-  float: left;
 }
+.starter2:hover {
+  color:#000;
+  background-color: #c4c4c4;
+  border-color: #c4c4c4;
+}
+.percent{
+  font-size: 13px;
+  padding: 8px 7px 8px 10px;
+  background: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  width:18%;
+}
+
+.percent .selection select{
+  background: transparent;
+  line-height: 1;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  font-size: 1em;
+}
+
+.there {
+  margin: 10px;
+}
+
 .aboutPicture {
   display: block;
   margin-left: auto;
@@ -201,11 +264,42 @@ html, body {
   padding-bottom: 5px;
 
 }
-
+#coughData1 {
+  color: #f54242;
+  font-size: 18px;
+}
+#cd1 {
+  font-size: 18px;
+}
+#coughData2 {
+  color: #f58a42;
+  font-size: 18px;
+}
+#cd2 {
+  font-size: 18px;
+}
+#coughData3 {
+  color: #f5ec42;
+  font-size: 18px;
+}
+#cd3 {
+  font-size: 18px;
+}
+#cd0 {
+  font-size: 18px;
+}
+#coughStrength {
+  font-size: 18px;
+  color: #52ff7d;
+}
+#para1 {
+  font-weight: lighter;
+}
 .chart1 {
   display: inline-block;
-  width:45%;
-  margin-top: 20px;
+  float: right;
+  overflow:auto;
+  width: 45%;
 }
 .chart3 {
   display: inline-block;
@@ -216,9 +310,8 @@ html, body {
 }
 .chart5 {
   display: inline-block;
-  float: right;
-  overflow:auto;
-  width: 45%;
+  width:45%;
+  margin-top: 20px;
 }
 .chart2 {
   display: inline-block;
@@ -239,6 +332,10 @@ html, body {
 .chart10 {
   display: inline-block;
   width:45%;
+}
+.chart10_2 {
+  width: 55%;
+  margin-left: 20%;
 }
 .chart11 {
   display: inline-block;
