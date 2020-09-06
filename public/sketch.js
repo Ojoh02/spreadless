@@ -36,7 +36,16 @@ let option6 = document.getElementById('input6');
 
 let percent2 = '', percent3 = '', percent4 = '', percent5 = '', p6 = '';
 
-let firebaseConfig = FIREBASE_CONFIG;
+let firebaseConfig = {
+    apiKey: "AIzaSyD6xCr-JvHbd8JA8R0YvewHML_qeHQ2deU",
+    authDomain: "spreadless-5e858.firebaseapp.com",
+    databaseURL: "https://spreadless-5e858.firebaseio.com",
+    projectId: "spreadless-5e858",
+    storageBucket: "spreadless-5e858.appspot.com",
+    messagingSenderId: "656956132180",
+    appId: "1:656956132180:web:4344bfaf3e9a1333e956c1",
+    measurementId: "G-1TYS1WCBMP"
+};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

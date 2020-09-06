@@ -1,7 +1,7 @@
 {
   "name": "xproto1",
   "version": "1.0.0",
-  "description": "CNN Machine Learning Neural Network",
+  "description": "Spreadless",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
