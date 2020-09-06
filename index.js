@@ -16,12 +16,12 @@ database.loadDatabase();
 const db = new Datastore('db.db');
 db.loadDatabase();
 
-const survey = new Datastore(filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/survey.db');
+const survey = new Datastore({filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/survey.db'});
 survey.loadDatabase(function(err) {
   console.log(err);
 });
 
-const feedback = new Datastore(filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/feedback.db');
+const feedback = new Datastore({filename: 'https://raw.githubusercontent.com/Ojoh02/spreadless/master/feedback.db'});
 feedback.loadDatabase(function(err) {
   console.log(err);
 });
