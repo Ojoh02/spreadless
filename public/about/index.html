@@ -160,11 +160,29 @@
           increases. I found remarkable similarities between the graphs provided
           by The Lancet and mine, affirming the idea that density is an adequate
           method of finding the infection rate of the virus at various distances. </p>
-
-          <p class='cough'>Link to Study:</p>
+          <div class='cough'>
+          <a href='https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)31142-9/fulltext'>Link to Study</a>
+          </div>
+          <div class='cough'></div>
+          <div class='cough'></div>
+          <div class='cough'></div>
           <p class='cough'>
-          thelancet.com/journals/lancet/article/PIIS0140-6736(20)31142-9/fulltext
+            The correlation with the chance of getting the virus and exposure
+            time is based off a study by the University of the Philippines
+            College of Medicine. Their study measured the time people were exposed
+            to the virus and compared it to the number of newly infected people.
+            The data used in my calculations was based on the exposure of
+            talking to just one person, but the study also includes an 'encounter'
+            value that could factor in the exposure of more than one person. The
+            percent chance of being infected was based off of the fraction of one
+            new infection in the graphs provided within the study.
           </p>
+          <div class='cough'>
+            <a href='https://www.medrxiv.org/content/10.1101/2020.03.27.20045336v1.full.pdf'>Link to Study</a>
+          </div>
+          <div class='cough'></div>
+          <div class='cough'></div>
+          <div class='cough'></div>
           <h1 class='cough'>The Significance</h1>
           <p class='cough'>
             Awareness. We need to be aware of our actions
@@ -213,12 +231,36 @@
               fluid simulation, but was optimized to match with the approximate
               size, shape, and strength of a specified cough provided by the user.
               Credit goes to him for creating the simulation.</p>
-            <p class='cough'>Copyright (c) 2020 by Pavel Dobryakov (https://codepen.io/PavelDoGreat/pen/zdWzEL)</p>
+            <p class='cough'>Copyright (c) 2020 by Pavel Dobryakov (
+            <a href='https://codepen.io/PavelDoGreat/pen/zdWzEL'>https://codepen.io/PavelDoGreat/pen/zdWzEL</a>
+            )</p>
 
             <p class='cough'>
               Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
             </p>
     </div>
-
+    <div class='info container'>
+        <h1 class='cough'>Cough Graphs</h1>
+        <p class='cough'>These 4 graphs illustrate the trends
+          identified in the cough algorithm. "Cough strength"
+          is measured by the size and shape of your audio input.
+          The chance of getting the virus was found by comparing
+          data from scientific studies with the different components
+          of the cough. The chance measured is within the first five
+          minutes, which is relatively short exposure.</p>
+        <div class='chart10'>
+          <canvas id="myChart10" width="200" height="200"></canvas>
+        </div>
+        <div class='chart11'>
+          <canvas id="myChart11" width="200" height="200"></canvas>
+        </div>
+        <div class='chart12'>
+          <canvas id="myChart12" width="200" height="200"></canvas>
+        </div>
+        <div class='chart13'>
+          <canvas id="myChart13" width="200" height="200"></canvas>
+        </div>
+    </div>
+    <script src="about.js"></script>
   </body>
 </html>

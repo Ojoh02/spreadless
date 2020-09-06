@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../style.css">
     <title>Spread Less</title>
@@ -93,28 +94,84 @@
         <div class='col-lg-5 offset-md-2'>
           <div class='mainThing3 pb-5 pt-4 px-4'>
             <h1 class='cough'>Cough Data</h1>
-            <p class='cough'>~If Cougher is Infected~</p>
-            <p class='cough'>Chance of Getting Virus 3 feet away after</p>
+            <p id='coughStrength' class='cough'></p>
+            <p id='cd0' class='cough'>~If Cougher is Infected~</p>
+            <p id='cd1'class='cough'>Chance of Getting Virus 3 Feet Away Within</p>
             <p id='coughData1' class='cough'></p>
-            <p class='cough'>Chance of Getting Virus 6 feet away after</p>
+            <p id='cd2' class='cough'>Chance of Getting Virus 6 Feet Away Within</p>
             <p id='coughData2' class='cough'></p>
-            <p class='cough'>Chance of Getting Virus 9 feet away after</p>
+            <p id='cd3' class='cough'>Chance of Getting Virus 9 Feet Away Within</p>
             <p id='coughData3' class='cough'></p>
-            <p id='coughData4' class='cough'></p>
           </div>
         </div>
       </div>
+    </div>
+    <div class='info container'>
+        <h2 class='cough'>Thoughts & Feedback</h2>
+        <span id='span'></span>
+        <p id='there1' class='there'>How accurate was your prediction?</p>
+        <div id='t1' class='percent'>
+          <div class='selection'>
+            <select name='percent' id='th1'>
+              <option disabled selected value>Select</option>
+              <option>Very Inaccurate</option>
+              <option>Relatively Inaccurate</option>
+              <option>Relatively Accurate</option>
+              <option>Very Accurate</option>
+            </select>
+          </div>
+         </div>
+        <p id='there2' class='there'>Did this increase your belief in standing 6 feet apart?</p>
+        <div id='t2' class='percent'>
+          <div class='selection'>
+            <select name='percent' id='th2'>
+              <option disabled selected value>Select</option>
+              <option>No</option>
+              <option>Yes</option>
+            </select>
+          </div>
+         </div>
+        <p id='there3' class='there'>How helpful was this?</p>
+        <div id='t3' class='percent'>
+          <div class='selection'>
+            <select name='percent' id='th3'>
+              <option disabled selected value>Select</option>
+              <option>Not helpful</option>
+              <option>Somewhat helpful</option>
+              <option>Very helpful</option>
+            </select>
+          </div>
+         </div>
+        <p id='there4' class='there'>Your Age Group:</p>
+        <div id='t4' class='percent'>
+          <div class='selection'>
+            <select name='percent' id='th4'>
+              <option disabled selected value>Select</option>
+              <option>0-10</option>
+              <option>10-20</option>
+              <option>20-30</option>
+              <option>40-50</option>
+              <option>60-70+</option>
+            </select>
+          </div>
+         </div>
+        <p id='there5' class='there'>Your state within the United States or your country outside of the US:</p>
+        <form>
+          <input type='text' id='th5'>
+        </form>
+        <button id='submitting' class='sub btn btn-outline-secondary' data-toggle='collapse' data-target='#emoji'>
+        Submit</button>
     </div>
     <div class='info container'>
         <h1 class='cough'>Cough Info</h1>
         <div class='chart6'>
           <canvas id="myChart6" width="200" height="200"></canvas>
         </div>
-        <div class='chart5'>
-          <canvas id="myChart5" width="200" height="200"></canvas>
-        </div>
         <div class='chart1'>
           <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+        <div class='chart5'>
+          <canvas id="myChart5" width="200" height="200"></canvas>
         </div>
         <div class='chart3'>
           <canvas id="myChart3" width="200" height="200"></canvas>
@@ -131,7 +188,7 @@
         <h1 class='cough'></h1>
 
         <h1 class='cough'>The Process</h1>
-        <p class='cough'>
+        <p id='para1'class='cough'>
           Initially, the audio input is converted into a
           visualization of a Fast Fourier transform (FFT)
           that a convolutional neural network (CNN) can then

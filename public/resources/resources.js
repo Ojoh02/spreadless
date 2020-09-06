@@ -4,16 +4,108 @@ let datas;
 let collect;
 let oArray;
 let newArray;
+let corrects;
 let cols, rows;
 let change = [];
-let graph1 = [];
+let graph1 = [], graph1_2 = [], graph1_3 = [];
 let graph2 = [];
 let graph3 = [];
 let graph4 = [];
 let graph5 = [];
 let graph6 = [];
 
+let feet3, feet6, feet9;
 let total = 0;
+
+let b1, b2, b3, b4, b5
+
+let firebaseConfig = {
+    apiKey: "AIzaSyD6xCr-JvHbd8JA8R0YvewHML_qeHQ2deU",
+    authDomain: "spreadless-5e858.firebaseapp.com",
+    databaseURL: "https://spreadless-5e858.firebaseio.com",
+    projectId: "spreadless-5e858",
+    storageBucket: "spreadless-5e858.appspot.com",
+    messagingSenderId: "656956132180",
+    appId: "1:656956132180:web:4344bfaf3e9a1333e956c1",
+    measurementId: "G-1TYS1WCBMP"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+let database = firebase.database();
+
+let t1 = '', t2 = '', t3 = '', t4 = '', t5 = '';
+const submitting = document.getElementById('submitting');
+const span = document.getElementById('span');
+
+const th1 = document.getElementById('th1');
+const th2 = document.getElementById('th2');
+const th3 = document.getElementById('th3');
+const th4 = document.getElementById('th4');
+const th5 = document.getElementById('th5');
+
+const t_1 = document.getElementById('t1');
+const t_2 = document.getElementById('t2');
+const t_3 = document.getElementById('t3');
+const t_4 = document.getElementById('t4');
+
+th1.oninput = function () {
+  t1 = this.value;
+}
+th2.oninput = function () {
+  t2 = this.value;
+}
+th3.oninput = function () {
+  t3 = this.value;
+}
+th4.oninput = function () {
+  t4 = this.value;
+}
+th5.oninput = function () {
+  t5 = this.value;
+}
+
+submitting.addEventListener('click', async event => {
+  if (t1 == '' || t2 == '' || t3 == '' || t4 == '' || t5 == '') {
+    alert('Please fill out all areas!');
+  } else {
+    let ref2 = database.ref('feedback');
+    let dataFeedback = {
+      accuracy: t1,
+      belief: t2,
+      helpful: t3,
+      age: t4,
+      location: t5
+    }
+    ref2.push(dataFeedback);
+
+    there1.style.display = 'none';
+    t_1.style.display = 'none';
+    th1.style.display = 'none';
+
+    there2.style.display = 'none';
+    t_2.style.display = 'none';
+    th2.style.display = 'none';
+
+    there3.style.display = 'none';
+    t_3.style.display = 'none';
+    th3.style.display = 'none';
+
+    there4.style.display = 'none';
+    t_4.style.display = 'none';
+    th4.style.display = 'none';
+
+    there5.style.display = 'none';
+    th5.style.display = 'none';
+
+    submitting.style.display = 'none';
+
+    const para = document.createElement('p');
+    para.innerHTML = 'Thanks for your feedback!';
+    span.appendChild(para);
+    }
+  }
+);
 
 async function getData() {
   const response = await fetch('/collect');
@@ -30,6 +122,24 @@ let s1 = async function(sketch) {
     sketch.colorMode(sketch.HSB);
     datas = await getData();
     newArray = datas.pixelArray;
+    b1 = datas.perc2;
+    b2 = datas.perc3;
+    b3 = datas.perc4;
+    b4 = datas.perc5;
+    b5 = datas.perc6;
+    // corrects = datas.correctOne;
+    // const data = {corrects, newArray};
+    // //console.log(data);
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // };
+    // const response = await fetch('/pics', options);
+    // const json = await response.json();
+
     for (let i = 0; i < newArray.length; i++) {
       change.push(newArray[i]);
     }
@@ -140,7 +250,6 @@ let s1 = async function(sketch) {
     let cot1 = 0, cot2 = 0, cot3 = 0, cot4 = 0, cot5 = 0, cot6 = 0, cot7 = 0, cot8 = 0, cot9 = 0;
     let offset0 = 0, offset1 = 0, offset2 = 0, offset3 = 0, offset4 = 0;
     let diff0 = 0, diff1 = 0, diff2 = 0, diff3 = 0, diff4 = 0, diff5 = 0, diff6 = 0, diff7 = 0, diff8 = 0, diff9 = 0;
-    let avg0 = 0, avg1 = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5 = 0, avg6 = 0, avg7 = 0, avg8 = 0, avg9 = 0;
     let i0 = 0, i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0;
     for (let i = 0; i < largeArray.length; i++) {
       densityMax = 0;
@@ -296,58 +405,6 @@ let s1 = async function(sketch) {
           }
         }
       }
-
-      index1 = Math.round(index1/48);
-      if (index1 == 0) {
-        avg0 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i0++;
-      } else if (index1 == 1) {
-        avg1 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i1++;
-      } else if (index1 == 2) {
-        avg2 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i2++;
-      } else if (index1 == 3) {
-        avg3 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i3++;
-      } else if (index1 == 4) {
-        avg4 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i4++;
-      } else if (index1 == 5) {
-        avg5 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i5++;
-      } else if (index1 == 6) {
-        avg6 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i6++;
-      } else if (index1 == 7) {
-        avg7 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i7++;
-      } else if (index1 == 8) {
-        avg8 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i8++;
-      } else if (index1 == 9) {
-        avg9 += Math.round(densityMax/avgNumber/findMax*100 * 100)/100;
-        i9++;
-      }
-    }
-    graph1.push(avg1/i1);
-    graph1.push(avg1/i1);
-    graph1.push(avg2/i2);
-    graph1.push(avg3/i3);
-    graph1.push(avg4/i4);
-    graph1.push(avg5/i5);
-    graph1.push(avg6/i6);
-    graph1.push(avg7/i7);
-    graph1.push(avg8/i8);
-    graph1.push(avg9/i9);
-    let findMax1 = 0;
-    for (let i = 0; i < graph1.length; i++) {
-      if (graph1[i] > findMax1) {
-        findMax1 = graph1[i];
-      }
-    }
-    for (let i = 0; i < graph1.length; i++) {
-      graph1[i] = Math.round(graph1[i]/findMax1*100 * 100)/100;
     }
     let max0 = 0, max1 = 0, max2 = 0, max3 = 0, max4 = 0, max5 = 0, max6 = 0, max7 = 0, max8 = 0, max9 = 0;
     for (let i = 0; i < largeArray.length; i++) {
@@ -419,23 +476,23 @@ let s1 = async function(sketch) {
     graph3.push(Math.round((difMax7-difMin7)/48*100)/100);
     graph3.push(Math.round((difMax8-difMin8)/48*100)/100);
     graph3.push(Math.round((difMax9-difMin9)/48*100)/100);
-    graph4.push(offset0*2/120);
-    graph4.push(offset1/120);
-    graph4.push(offset2/120);
-    graph4.push(offset3/120);
-    graph4.push(offset4/120);
+    graph4.push(Math.round(offset0*2/120*100)/100);
+    graph4.push(Math.round(offset1/120*100)/100);
+    graph4.push(Math.round(offset2/120*100)/100);
+    graph4.push(Math.round(offset3/120*100)/100);
+    graph4.push(Math.round(offset4/120*100)/100);
     let findMax4 = 0;
     for (let i = 0; i < graph4.length; i++) {
       if (graph4[i] > findMax4) {
         findMax4 = graph4[i];
       }
     }
-    for (let i = 0; i < graph1.length; i++) {
+    for (let i = 0; i < graph4.length; i++) {
       graph4[i] = Math.round(graph4[i]/findMax4*100 * 100)/100;
     }
-    graph6.push(tot1/90*1.5/60);
-    graph6.push(tot1/90*1.5/60);
-    graph6.push(tot2/90/60);
+    graph6.push(tot1/90*2*1.05/60);
+    graph6.push(tot1/90*2/60);
+    graph6.push(tot2/90*1.2/60);
     graph6.push(tot3/90/60);
     graph6.push(tot4/90/60);
     graph6.push(tot5/90/60);
@@ -443,6 +500,9 @@ let s1 = async function(sketch) {
     graph6.push(tot7/90/60);
     graph6.push(tot8/90/60);
     graph6.push(tot9/90/60);
+    feet3 = Math.round(tot3/90/60*100)/100;
+    feet6 = Math.round(tot6/90/60*100)/100;
+    feet9 = Math.round(tot9/90/60*100)/100;
     let findMax2 = 0;
     for (let i = 0; i < graph2.length; i++) {
       if (graph2[i] > findMax2) {
@@ -455,14 +515,140 @@ let s1 = async function(sketch) {
     for (let i = 0; i < graph6.length; i++) {
       graph6[i] = Math.round(graph6[i]*100)/100;
     }
+    graph1.push(feet6);
+    let record6_5 = Math.round(feet6*1.63*100)/100;
+    graph1.push(Math.round(feet6*1.63*100)/100);
+    graph1.push(Math.round(feet6*3.16*100)/100);
+    let record6_15 = Math.round(feet6*4.67*100)/100;
+    graph1.push(Math.round(feet6*4.67*100)/100);
+    graph1.push(Math.round(feet6*6.08*100)/100);
+    graph1.push(Math.round(feet6*7.57*100)/100);
+    let record6_30 = Math.round(feet6*9.02*100)/100;
+    graph1.push(Math.round(feet6*9.02*100)/100);
+    graph1.push(Math.round(feet6*10.71*100)/100);
+    graph1.push(Math.round(feet6*12.01*100)/100);
+    let record6_45 = Math.round(feet6*13.5*100)/100;
+    graph1.push(Math.round(feet6*13.5*100)/100);
+
+    let record3_5, record3_15, record3_30, record3_45;
+    if (feet3 <= 100) {
+      graph1_2.push(feet3);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*1.63 <= 100) {
+      graph1_2.push(Math.round(feet3*1.63*100)/100);
+      record3_5 = Math.round(feet3*1.63*100)/100;
+    } else {
+      graph1_2.push(100);
+      record3_5 = 100;
+    }
+    if (feet3*3.16 <= 100) {
+      graph1_2.push(Math.round(feet3*3.16*100)/100);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*4.67 <= 100) {
+      graph1_2.push(Math.round(feet3*4.67*100)/100);
+      record3_15 = Math.round(feet3*4.67*100)/100;
+    } else {
+      graph1_2.push(100);
+      record3_15 = 100;
+    }
+    if (feet3*6.08 <= 100) {
+      graph1_2.push(Math.round(feet3*6.08*100)/100);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*7.57 <= 100) {
+      graph1_2.push(Math.round(feet3*7.57*100)/100);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*9.02 <= 100) {
+      graph1_2.push(Math.round(feet3*9.02*100)/100);
+      record3_30 = Math.round(feet3*9.02*100)/100;
+    } else {
+      graph1_2.push(100);
+      record3_30 = 100;
+    }
+    if (feet3*10.71 <= 100) {
+      graph1_2.push(Math.round(feet3*10.71*100)/100);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*12.01 <= 100) {
+      graph1_2.push(Math.round(feet3*12.01*100)/100);
+    } else {
+      graph1_2.push(100);
+    }
+    if (feet3*13.5 <= 100) {
+      graph1_2.push(Math.round(feet3*13.5*100)/100);
+      record3_45 = Math.round(feet3*13.5*100)/100;
+    } else {
+      graph1_2.push(100);
+      record3_45 = 100;
+    }
+
+    graph1_3.push(feet9);
+    let record9_5 = Math.round(feet9*1.63*100)/100;
+    graph1_3.push(Math.round(feet9*1.63*100)/100);
+    graph1_3.push(Math.round(feet9*3.16*100)/100);
+    let record9_15 = Math.round(feet9*4.67*100)/100;
+    graph1_3.push(Math.round(feet9*4.67*100)/100);
+    graph1_3.push(Math.round(feet9*6.08*100)/100);
+    graph1_3.push(Math.round(feet9*7.57*100)/100);
+    let record9_30 = Math.round(feet9*9.02*100)/100;
+    graph1_3.push(Math.round(feet9*9.02*100)/100);
+    graph1_3.push(Math.round(feet9*10.71*100)/100);
+    graph1_3.push(Math.round(feet9*12.01*100)/100);
+    let record9_45 = Math.round(feet9*13.5*100)/100;
+    graph1_3.push(Math.round(feet9*13.5*100)/100);
+
     let grandTotal = (tot1*1.5+tot1*1.5+tot2+tot3+tot4+tot5+tot6+tot7+tot8+tot9)/90;
-    // console.log(grandTotal);
+    let coughNum;
+    if (feet6 == 0) {
+      coughNum = 1;
+    } else if (feet6 == .13) {
+      coughNum = 2;
+    } else if (feet6 == .83) {
+      coughNum = 3;
+    } else if (feet6 == 1.87) {
+      coughNum = 4;
+    } else if (feet6 == 2.95) {
+      coughNum = 5;
+    } else if (feet6 == 3.91) {
+      coughNum = 6;
+    } else if (feet6 == 4.92) {
+      coughNum = 7;
+    } else if (feet6 == 5.84) {
+      coughNum = 8;
+    } else if (feet6 == 6.64) {
+      coughNum = 9;
+    } else if (feet6 == 7.35) {
+      coughNum = 10;
+    }
+    let coughStrength = document.getElementById('coughStrength');
+    coughStrength.innerHTML = `Your Cough Strength (1 to 10): ${coughNum}`;
+    let ref = database.ref('index');
+    let data = {
+      feet3: b1,
+      feet6: b2,
+      feet9: b3,
+      age: b4,
+      location: b5,
+      coughStrength: coughNum,
+      rfeet3: feet3,
+      rfeet6: feet6,
+      rfeet9: feet9
+    }
+    ref.push(data);
     let coughData1 = document.getElementById('coughData1');
-    coughData1.innerHTML = `4 seconds: ${Math.round(graph6[3]*.98*100)/100}% || 10 seconds: ${Math.round(graph6[3]*.73*100)/100}% || 18 seconds: ${Math.round(graph6[3]*.37*100)/100}%`;
+    coughData1.innerHTML = `5 minutes: ${record3_5}% || 15 minutes: ${record3_15}% || 30 minutes: ${record3_30}% || 45 minutes: ${record3_45}%`;
     let coughData2 = document.getElementById('coughData2');
-    coughData2.innerHTML = `4 seconds: ${Math.round(graph6[6]*.98*100)/100}% || 10 seconds: ${Math.round(graph6[6]*.73*100)/100}% || 18 seconds: ${Math.round(graph6[6]*.37*100)/100}%`;
+    coughData2.innerHTML = `5 minutes: ${record6_5}% || 15 minutes: ${record6_15}% || 30 minutes: ${record6_30}% || 45 minutes: ${record6_45}%`;
     let coughData3 = document.getElementById('coughData3');
-    coughData3.innerHTML = `4 seconds: ${Math.round(graph6[9]*.98*100)/100}% || 10 seconds: ${Math.round(graph6[9]*.73*100)/100}% || 18 seconds: ${Math.round(graph6[9]*.37*100)/100}%`;
+    coughData3.innerHTML = `5 minutes: ${record9_5}% || 15 minutes: ${record9_15}% || 30 minutes: ${record9_30}% || 45 minutes: ${record9_45}%`;
     chartIt();
   }
   function getLine(v1, v2) {
@@ -478,12 +664,24 @@ let s1 = async function(sketch) {
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            labels: [0, 5 , 10, 15, 20, 25, 30, 35, 40, 45],
             datasets: [{
                 fontColor: '#b7d3e8',
-                label: 'Average Relative Size',
+                label: '3 feet',
+                data: graph1_2,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                fill: false
+            }, {
+                fontColor: '#b7d3e8',
+                label: '6 feet',
                 data: graph1,
                 borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false
+            }, {
+                fontColor: '#b7d3e8',
+                label: '9 feet',
+                data: graph1_3,
+                borderColor: 'rgba(75, 192, 192, 1)',
                 fill: false
             }]
         },
@@ -492,7 +690,7 @@ let s1 = async function(sketch) {
               display: true,
               fontColor: '#b7d3e8',
               fontSize: 18,
-              text: 'Average Relative Size vs Distance'
+              text: 'Chance Getting Virus vs Time'
             },
             legend: {
               labels: {
@@ -504,7 +702,7 @@ let s1 = async function(sketch) {
                   scaleLabel: {
                     display: true,
                     fontColor: '#b7d3e8',
-                    labelString: 'Distance (feet)'
+                    labelString: 'Time (minutes)'
                   },
                     ticks: {
                       fontColor: '#b7d3e8'
@@ -517,7 +715,7 @@ let s1 = async function(sketch) {
                   scaleLabel: {
                     display: true,
                     fontColor: '#b7d3e8',
-                    labelString: 'Average Relative Size (%)'
+                    labelString: 'Chance Getting Virus (%)'
                   },
                     ticks: {
                         fontColor: '#b7d3e8',
@@ -711,7 +909,7 @@ let s1 = async function(sketch) {
             datasets: [{
                 fontColor: '#b7d3e8',
                 label: 'Relative Density',
-                data: [84, 100, 98, 95, 86, 73, 64, 46, 40, 37],
+                data: [100, 98, 94, 90, 86, 73, 64, 46, 40, 37],
                 borderColor: 'rgba(153, 102, 255, 1)',
                 fill: false
             }]
@@ -778,7 +976,7 @@ let s1 = async function(sketch) {
               display: true,
               fontColor: '#b7d3e8',
               fontSize: 18,
-              text: 'Chance Getting Virus vs Distance'
+              text: 'Chance Getting Virus within 5 minutes vs Distance'
             },
             legend: {
               labels: {
@@ -816,9 +1014,7 @@ let s1 = async function(sketch) {
             }
         }
     });
-
   }
-
 }
 
 new p5(s1, 'mainContents');
