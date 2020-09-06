@@ -631,7 +631,7 @@ let s1 = async function(sketch) {
     let coughStrength = document.getElementById('coughStrength');
     coughStrength.innerHTML = `Your Cough Strength (1 to 10): ${coughNum}`;
     let ref = database.ref('index');
-    let dataIndex = {
+    let data = {
       feet3: b1,
       feet6: b2,
       feet9: b3,
@@ -642,7 +642,7 @@ let s1 = async function(sketch) {
       rfeet6: record6_5,
       rfeet9: record9_5
     }
-    ref.push(dataIndex);
+    ref.push(data);
     let coughData1 = document.getElementById('coughData1');
     coughData1.innerHTML = `5 minutes: ${record3_5}% || 15 minutes: ${record3_15}% || 30 minutes: ${record3_30}% || 45 minutes: ${record3_45}%`;
     let coughData2 = document.getElementById('coughData2');
