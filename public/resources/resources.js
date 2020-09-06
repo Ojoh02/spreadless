@@ -648,7 +648,7 @@ let s1 = async function(sketch) {
     let coughData2 = document.getElementById('coughData2');
     coughData2.innerHTML = `5 minutes: ${record6_5}% || 15 minutes: ${record6_15}% || 30 minutes: ${record6_30}% || 45 minutes: ${record6_45}%`;
     let coughData3 = document.getElementById('coughData3');
-    coughData3.innerHTML = `5 seconds: ${record9_5}% || 15 minutes: ${record9_15}% || 30 minutes: ${record9_30}% || 45 minutes: ${record9_45}%`;
+    coughData3.innerHTML = `5 minutes: ${record9_5}% || 15 minutes: ${record9_15}% || 30 minutes: ${record9_30}% || 45 minutes: ${record9_45}%`;
     chartIt();
   }
   function getLine(v1, v2) {
