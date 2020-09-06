@@ -291,6 +291,7 @@ app.get('/collect', (request, response) => {
       appId: appId,
       measurementId: measurementId
     }
+    console.log(data);
     response.json(data);
 });
 
