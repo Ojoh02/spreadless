@@ -17,6 +17,21 @@ let graph6 = [];
 let feet3, feet6, feet9;
 let total = 0;
 
+let firebaseConfig = {
+    apiKey: "AIzaSyD6xCr-JvHbd8JA8R0YvewHML_qeHQ2deU",
+    authDomain: "spreadless-5e858.firebaseapp.com",
+    databaseURL: "https://spreadless-5e858.firebaseio.com",
+    projectId: "spreadless-5e858",
+    storageBucket: "spreadless-5e858.appspot.com",
+    messagingSenderId: "656956132180",
+    appId: "1:656956132180:web:4344bfaf3e9a1333e956c1",
+    measurementId: "G-1TYS1WCBMP"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+let database = firebase.database();
+
 let t1 = '', t2 = '', t3 = '', t4 = '', t5 = '';
 const submitting = document.getElementById('submitting');
 const span = document.getElementById('span');
@@ -52,17 +67,15 @@ submitting.addEventListener('click', async event => {
   if (t1 == '' || t2 == '' || t3 == '' || t4 == '' || t5 == '') {
     alert('Please fill out all areas!');
   } else {
-    const data = {t1, t2, t3, t4, t5};
-    //console.log(data);
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    };
-    const response = await fetch('/feedback', options);
-    const json = await response.json();
+    let ref2 = database.ref('feedback');
+    let dataFeedback = {
+      accuracy: t1,
+      belief: t2,
+      helpful: t3,
+      age: t4,
+      location: t5
+    }
+    ref2.push(dataFeedback);
 
     there1.style.display = 'none';
     t_1.style.display = 'none';
@@ -610,6 +623,11 @@ let s1 = async function(sketch) {
     }
     let coughStrength = document.getElementById('coughStrength');
     coughStrength.innerHTML = `Your Cough Strength (1 to 10): ${coughNum}`;
+    let ref = database.ref('index');
+    let dataIndex = {
+      coughStrength: coughNum
+    }
+    ref.push(dataIndex);
     let coughData1 = document.getElementById('coughData1');
     coughData1.innerHTML = `5 minutes: ${record3_5}% || 15 minutes: ${record3_15}% || 30 minutes: ${record3_30}% || 45 minutes: ${record3_45}%`;
     let coughData2 = document.getElementById('coughData2');
