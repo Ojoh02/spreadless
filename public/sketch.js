@@ -193,7 +193,7 @@ let s1 = function(sketch){
             if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '') {
             } else {
               if (toggleValue) {
-                let timeLeft = 10;
+                let timeLeft = 2;
                 downloadTimer = setInterval(function() {
                   if (timeLeft < 1) {
                     clearInterval(downloadTimer);
@@ -207,7 +207,7 @@ let s1 = function(sketch){
                 }, 1000);
                 setTimeout(function() {
                   location.href = '/resources';
-                }, 10000);
+                }, 2000);
               }
             }
           }
