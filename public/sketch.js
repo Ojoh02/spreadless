@@ -2,7 +2,8 @@ let mic, fft, w, w2;
 let label, val;
 let speed, windSpeed, windAngle, temp, humidity; //add more slider values
 let cHeight, cWidth;
-let value = false, value2 = false, value3 = true, value5 = false;
+let value = false, value2 = false, value3 = true, value5 = false, manualInput = false, audioInput = false, restartValue = false;
+let restart;
 let myColor;
 let size, size2;
 let pixelArray, pixelArray2;
@@ -27,14 +28,19 @@ let here3 = document.getElementById('here3');
 let here4 = document.getElementById('here4');
 let here5 = document.getElementById('here5');
 let here6 = document.getElementById('here6');
+let here7 = document.getElementById('here7');
+let here8 = document.getElementById('here8');
 
 let option2 = document.getElementById('percent2');
 let option3 = document.getElementById('percent3');
 let option4 = document.getElementById('percent4');
 let option5 = document.getElementById('percent5');
 let option6 = document.getElementById('input6');
+let option7 = document.getElementById('percent7');
+let option8 = document.getElementById('percent8');
 
-let percent2 = '', percent3 = '', percent4 = '', percent5 = '', p6 = '';
+let manualSubmit = document.getElementById('manualSubmit');
+let percent2 = '', percent3 = '', percent4 = '', percent5 = '', p6 = '', percent7 = '', percent8 = '';
 
 function labelLabels(labeler) {
   if (labeler == '1') {
@@ -88,6 +94,34 @@ async function setup() {
 
 }
 
+manualSubmit.addEventListener('click', async event => {
+  console.log('hi');
+  if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '' || percent8 == '') {
+    alert('Please fill in the prediction survey!');
+  } else {
+      const data = {percent8, percent2, percent3, percent4, percent5, p6};
+      //console.log(data);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      const response = await fetch('/api', options);
+      const json = await response.json();
+      value2 = false;
+  }
+});
+
+manualSubmit.onclick = function () {
+  if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '' || percent8 == '') {
+  } else {
+    setTimeout(function() {
+      location.href = '/resources';
+    }, 1000);
+  }
+}
 
 let s1 = function(sketch){
   sketch.setup = function() {
@@ -138,44 +172,13 @@ let s1 = function(sketch){
         }
         if (counter < 1 && value) {
           const moreContent = document.getElementById('moreContent');
-
           const submit = document.createElement('BUTTON');
           submit.setAttribute('id', 'submit');
           submit.setAttribute('class', 'starter2 btn btn-outline-secondary');
           submit.style.marginLeft = '43%';
-          here0.style.display='block';
-          here1.style.display='block';
-          here2.style.display='block';
-          here3.style.display='block';
-          here4.style.display='block';
-          here5.style.display='block';
-          here6.style.display='block';
-
-          onOff2.style.display='block';
-          onOff3.style.display='block';
-          onOff4.style.display='block';
-          onOff5.style.display='block';
-          input6.style.display='block';
-
-          option2.oninput = function () {
-            percent2 = this.value;
-          }
-          option3.oninput = function () {
-            percent3 = this.value;
-          }
-          option4.oninput = function () {
-            percent4 = this.value;
-          }
-          option5.oninput = function () {
-            percent5 = this.value;
-          }
-          option6.oninput = function () {
-            p6 = this.value;
-          }
-
           let downloadTimer;
           submit.onclick = function () {
-            if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '') {
+            if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '') {
             } else {
               if (toggleValue) {
                 let timeLeft = 2;
@@ -196,12 +199,8 @@ let s1 = function(sketch){
               }
             }
           }
-          submit.textContent = 'Submit';
-          here2.appendChild(onOff2);
-          here3.appendChild(onOff3);
-          here4.appendChild(onOff4);
-          here5.appendChild(onOff5);
-          here6.appendChild(input6);
+          submit.textContent = 'Audio Submit';
+
           moreContent.appendChild(submit);
           value = false;
           capture();
@@ -263,37 +262,126 @@ let s2 = function(sketch) {
 
 let v = true;
 function toggle() {
-  if (!value && toggleValue) {
-    button.textContent = 'Restart';
-    mic = new p5.AudioIn();
-    fft = new p5.FFT(0, 64);
-    fft.setInput(mic);
-    if (v) {
-      newObject = new p5(s1, 'mainContent');
-      new p5(s2, 'mainContent');
-      v = false;
-    }
-    counter = 40;
-    mic.start();
-    getAudioContext().resume();
-    loop();
-    value = true;
-    value3 = true;
-    if (value5) {
-      elementRemove = document.getElementById('submit');
-      elementRemove.parentNode.removeChild(elementRemove);
-      value2 = false;
-      value5 = false;
-    }
+
+  here0.style.display='block';
+  here1.style.display='block';
+  here2.style.display='block';
+  here3.style.display='block';
+  here4.style.display='block';
+  here5.style.display='block';
+  here6.style.display='block';
+  here7.style.display='block';
+
+  onOff2.style.display='block';
+  onOff3.style.display='block';
+  onOff4.style.display='block';
+  onOff5.style.display='block';
+  input6.style.display='block';
+  onOff6.style.display='block';
+
+  here2.appendChild(onOff2);
+  here3.appendChild(onOff3);
+  here4.appendChild(onOff4);
+  here5.appendChild(onOff5);
+  here6.appendChild(input6);
+  here7.appendChild(onOff6);
+  option2.oninput = function () {
+    percent2 = this.value;
+  }
+  option3.oninput = function () {
+    percent3 = this.value;
+  }
+  option4.oninput = function () {
+    percent4 = this.value;
+  }
+  option5.oninput = function () {
+    percent5 = this.value;
+  }
+  option6.oninput = function () {
+    p6 = this.value;
+  }
+  option7.oninput = function () {
+    percent7 = this.value;
+    if (percent7 == 'Manual Input') {
+      manualInput = true;
+      here8.style.display='block';
+      onOff7.style.display='block';
+      here8.appendChild(onOff7);
+      option8.oninput = function () {
+        percent8 = this.value;
+      }
+      manualSubmit.style.display='block';
+      manualSubmit.style.marginLeft='35%';
+      if (audioInput) {
+        elementRemove1 = document.getElementById('mainContent');
+        elementRemove1.style.display='none';
+        audioInput = false;
+        if (document.getElementById('submit')) {
+          elementRemove2 = document.getElementById('submit');
+          elementRemove2.parentNode.removeChild(elementRemove2);
+          value2 = false;
+          value5 = false;
+        }
+      }
+    } else if (percent7 == 'Audio Input') {
+      manualSubmit.style.display='none';
+      audioInput = true;
+      if (manualInput) {
+        here8.style.display='none';
+        onOff7.style.display='none';
+        manualInput = false;
+      }
+      const mainContent = document.getElementById('mainContent');
+      mainContent.style.display='block';
+      // mainContent.style.marginLeft = '25%';
+      if (!restartValue) {
+        restart = document.createElement('BUTTON');
+        restartValue = true;
+      }
+      restart.style.display='block';
+      restart.textContent = 'Start';
+      restart.style.marginRight = '5%';
+      restart.style.marginBottom = '10%';
+      restart.setAttribute('id', 'restart');
+      restart.setAttribute('class', 'restart btn btn-outline-secondary');
+      mainContent.appendChild(restart);
+      restart.onclick = function () {
+        if (!value && toggleValue) {
+          restart.textContent = 'Restart';
+          mic = new p5.AudioIn();
+          fft = new p5.FFT(0, 64);
+          fft.setInput(mic);
+          if (v) {
+            newObject = new p5(s1, 'mainContent');
+            new p5(s2, 'mainContent');
+            v = false;
+          }
+          counter = 40;
+          mic.start();
+          getAudioContext().resume();
+          loop();
+          value = true;
+          value3 = true;
+          if (value5) {
+            elementRemove = document.getElementById('submit');
+            elementRemove.parentNode.removeChild(elementRemove);
+            value2 = false;
+            value5 = false;
+          }
+
+        }
+        else {
+          restart.textContent = 'Start';
+          counter = '';
+          mic.stop();
+          noLoop();
+          value = false;
+        }
+      }
+  }
 
   }
-  else {
-    button.textContent = 'Start';
-    counter = '';
-    mic.stop();
-    noLoop();
-    value = false;
-  }
+
 }
 
 
@@ -375,7 +463,7 @@ function capture() {
       f32array = this.datasetImages;
 
       submit.addEventListener('click', async event => {
-        if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '') {
+        if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '' || percent8 == '') {
           alert('Please fill in the prediction survey!');
         } else {
           if (toggleValue) {
@@ -387,8 +475,8 @@ function capture() {
               labelBytesView[i] = label9[i];
             }
             //const images = createImg(img4.src, 'img4');
-
-            const data = {f32array, percent2, percent3, percent4, percent5, p6};
+            percent8 = 0;
+            const data = {f32array, percent2, percent3, percent4, percent5, p6, percent8};
             //console.log(data);
             const options = {
               method: 'POST',

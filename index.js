@@ -54,6 +54,7 @@ let PIXEL_TOTAL = 10800;
 let xs2;
 
 let importantData;
+let importantPrediction;
 //large array tests
 let largeArray = [];
 let largeTensorArray = [];
@@ -129,140 +130,173 @@ function getPictures(predictions, dataReceive4) {
 
 app.post('/api', (request, response) => {
     const data = request.body;
-    importantData = data.f32array;
-    perc2 = data.percent2;
-    perc3 = data.percent3;
-    perc4 = data.percent4;
-    perc5 = data.percent5;
-    perc6 = data.p6;
-    response.json(data);
-    let y = new Promise((resolve, reject) => {
-      db.count({}, function(err, count) {
-        if (err) throw err;
-        resolve(count);
-      });
-    }).then((dataReceive) => {
-      databaseSize = dataReceive;
-      batchImagesArray = new Float32Array(databaseSize * IMAGE_SIZE);
-      batchLabelsArray = new Uint8Array(databaseSize * NUM_CLASSES);
-    }).then(() => {
-      let x = new Promise((resolve, reject) => {
-        db.find({}, function (err, data) {
+    if (data.percent8 == 0) {
+      importantData = data.f32array;
+      perc2 = data.percent2;
+      perc3 = data.percent3;
+      perc4 = data.percent4;
+      perc5 = data.percent5;
+      perc6 = data.p6;
+      response.json(data);
+      let y = new Promise((resolve, reject) => {
+        db.count({}, function(err, count) {
           if (err) throw err;
-          resolve(data);
+          resolve(count);
         });
       }).then((dataReceive) => {
-        getData(dataReceive);
-        const xs = tf.tensor2d(batchImagesArray, [databaseSize, IMAGE_SIZE]);
-        //console.log(xs);
-        //console.log(batchImagesArray);
-        //console.log(labelsArray);
-        const labels = tf.tensor2d(batchLabelsArray, [databaseSize, NUM_CLASSES]);
-        //console.log(labels);
-        //console.log(ys);
-        //tensor info goes in here
-        // console.log(batchDataArray);
-        //console.log(batchDataArray.length);
-        xs2 = tf.tensor2d(batchDataArray, [batchDataArray.length, 2]);
-        // let aryTry = [];
-        // for (let i = 0; i < ary0.length; i++) {
-        //   aryTry.push(ary0[i]);
-        // }
-        // let aryTry1 = [];
-        // for (let i = 0; i < ary1.length; i++) {
-        //   aryTry1.push(ary1[i]);
-        // }
-        // console.log(aryTry);
-        // console.log(aryTry1);
-        for (let i = 0; i < PIXEL_TOTAL; i++) {
-          largeTensorArray[i] = tf.tensor2d(largeArray[i], [largeArray[i].length, 1]);
-        }
-        databaseSizeTest = 1;
-        batchImagesArrayTest = new Float32Array(databaseSizeTest * IMAGE_SIZE);
-        batchLabelsArrayTest = new Uint8Array(databaseSizeTest * NUM_CLASSES);
-          let b = new Promise((resolve, reject) => {
-            database.find({}, function (err, data) {
-              if (err) throw err;
-              resolve(data);
-            });
-          }).then((dataReceive3) => {
-            // getDataTest(dataReceive3);
-            const xsTest = tf.tensor2d(batchImagesArrayTest, [databaseSizeTest, IMAGE_SIZE]);
-            //console.log(xsTest);
-            let predictImagesArray = [];
-            for (let i = 0; i < IMAGE_SIZE; i++) {
-              predictImagesArray[i] = importantData[i];
-            }
-            // let predictLabelsArray = [];
-            // let predictIndex = 0;
-            // let predictDatabaseIndex = 1;
-            // for (let i = IMAGE_SIZE*(predictDatabaseIndex-1); i < IMAGE_SIZE*predictDatabaseIndex; i++) {
-            //   predictImagesArray[predictIndex] = batchImagesArrayTest[i];
-            //   predictIndex++;
-            // }
-            const xPredict = tf.tensor2d(predictImagesArray, [1, IMAGE_SIZE]);
-
-            const labelsTest = tf.tensor2d(batchLabelsArrayTest, [databaseSizeTest, NUM_CLASSES]);
-            //console.log(labelsTest);
-            // predictIndex = 0;
-            // for (let i = NUM_CLASSES*(predictDatabaseIndex-1); i < NUM_CLASSES*predictDatabaseIndex; i++) {
-            //   predictLabelsArray[predictIndex] = batchLabelsArrayTest[i];
-            //   predictIndex++;
-            // }
-            // const labelsPredict = tf.tensor2d(predictLabelsArray, [1, NUM_CLASSES]);
-
-            run().then(() => {
-              run2();
-            });
-            async function run() {
-              // const model = getModel();
-              // await train(model, xs, xsTest, labels, labelsTest);
-              // await model.save('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model');
-              // console.log('Done first training model');
-
-              const model = await tf.loadLayersModel('https://raw.githubusercontent.com/Ojoh02/spreadless/master/saved_models/model/model.json');
-              predictedValue = doPrediction(model, xPredict);
-            }
-            console.log('Done first prediction');
-            async function run2() {
-              let c = new Promise((resolve, reject) => {
-                database.find({}, function (err, data) {
-                  if (err) throw err;
-                  resolve(data);
-                });
-              }).then((dataReceive4) => {
-                getPictures(predictedValue, dataReceive4);
-                console.log('Done second prediction');
+        databaseSize = dataReceive;
+        batchImagesArray = new Float32Array(databaseSize * IMAGE_SIZE);
+        batchLabelsArray = new Uint8Array(databaseSize * NUM_CLASSES);
+      }).then(() => {
+        let x = new Promise((resolve, reject) => {
+          db.find({}, function (err, data) {
+            if (err) throw err;
+            resolve(data);
+          });
+        }).then((dataReceive) => {
+          getData(dataReceive);
+          const xs = tf.tensor2d(batchImagesArray, [databaseSize, IMAGE_SIZE]);
+          //console.log(xs);
+          //console.log(batchImagesArray);
+          //console.log(labelsArray);
+          const labels = tf.tensor2d(batchLabelsArray, [databaseSize, NUM_CLASSES]);
+          //console.log(labels);
+          //console.log(ys);
+          //tensor info goes in here
+          // console.log(batchDataArray);
+          //console.log(batchDataArray.length);
+          xs2 = tf.tensor2d(batchDataArray, [batchDataArray.length, 2]);
+          // let aryTry = [];
+          // for (let i = 0; i < ary0.length; i++) {
+          //   aryTry.push(ary0[i]);
+          // }
+          // let aryTry1 = [];
+          // for (let i = 0; i < ary1.length; i++) {
+          //   aryTry1.push(ary1[i]);
+          // }
+          // console.log(aryTry);
+          // console.log(aryTry1);
+          for (let i = 0; i < PIXEL_TOTAL; i++) {
+            largeTensorArray[i] = tf.tensor2d(largeArray[i], [largeArray[i].length, 1]);
+          }
+          databaseSizeTest = 1;
+          batchImagesArrayTest = new Float32Array(databaseSizeTest * IMAGE_SIZE);
+          batchLabelsArrayTest = new Uint8Array(databaseSizeTest * NUM_CLASSES);
+            let b = new Promise((resolve, reject) => {
+              database.find({}, function (err, data) {
+                if (err) throw err;
+                resolve(data);
               });
-              // for (let i = 0; i < PIXEL_TOTAL; i++) {
-              //   // largeModelArray[i] = createModel();
-              //   largeModelArray[i] = await tf.loadLayersModel(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}/model.json`);
+            }).then((dataReceive3) => {
+              // getDataTest(dataReceive3);
+              const xsTest = tf.tensor2d(batchImagesArrayTest, [databaseSizeTest, IMAGE_SIZE]);
+              //console.log(xsTest);
+              let predictImagesArray = [];
+              for (let i = 0; i < IMAGE_SIZE; i++) {
+                predictImagesArray[i] = importantData[i];
+              }
+              // let predictLabelsArray = [];
+              // let predictIndex = 0;
+              // let predictDatabaseIndex = 1;
+              // for (let i = IMAGE_SIZE*(predictDatabaseIndex-1); i < IMAGE_SIZE*predictDatabaseIndex; i++) {
+              //   predictImagesArray[predictIndex] = batchImagesArrayTest[i];
+              //   predictIndex++;
               // }
-              //
-              // let dataArray = [predictedValue/10, 0];
-              // const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
-              //
-              // for (let i = 0; i < PIXEL_TOTAL; i++) {
-              //   // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
-              // }
-              //
-              // // console.log('Done second training model')
-              // // for (let i = 0; i < PIXEL_TOTAL; i++) {
-              // //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
-              // // }
-              // pixelArray = [];
-              // for (let i = 0; i < PIXEL_TOTAL; i++) {
-              //   largeDataArray[i] = testModel(largeModelArray[i], dataTest);
-              //   pixelArray.push(largeDataArray[i]);
-              // }
+              const xPredict = tf.tensor2d(predictImagesArray, [1, IMAGE_SIZE]);
 
-              // console.log(pixelArray);
-            }
+              const labelsTest = tf.tensor2d(batchLabelsArrayTest, [databaseSizeTest, NUM_CLASSES]);
+              //console.log(labelsTest);
+              // predictIndex = 0;
+              // for (let i = NUM_CLASSES*(predictDatabaseIndex-1); i < NUM_CLASSES*predictDatabaseIndex; i++) {
+              //   predictLabelsArray[predictIndex] = batchLabelsArrayTest[i];
+              //   predictIndex++;
+              // }
+              // const labelsPredict = tf.tensor2d(predictLabelsArray, [1, NUM_CLASSES]);
+
+              run().then(() => {
+                run2();
+              });
+              async function run() {
+                // const model = getModel();
+                // await train(model, xs, xsTest, labels, labelsTest);
+                // await model.save('file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model');
+                // console.log('Done first training model');
+
+                const model = await tf.loadLayersModel('https://raw.githubusercontent.com/Ojoh02/spreadless/master/saved_models/model/model.json');
+                predictedValue = doPrediction(model, xPredict);
+              }
+              console.log('Done first prediction');
+              async function run2() {
+                let c = new Promise((resolve, reject) => {
+                  database.find({}, function (err, data) {
+                    if (err) throw err;
+                    resolve(data);
+                  });
+                }).then((dataReceive4) => {
+                  getPictures(predictedValue, dataReceive4);
+                  console.log('Done second prediction');
+                });
+                // for (let i = 0; i < PIXEL_TOTAL; i++) {
+                //   // largeModelArray[i] = createModel();
+                //   largeModelArray[i] = await tf.loadLayersModel(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}/model.json`);
+                // }
+                //
+                // let dataArray = [predictedValue/10, 0];
+                // const dataTest = tf.tensor2d(dataArray, [1, 2]); //batchArrayDataTest.length instead of 1
+                //
+                // for (let i = 0; i < PIXEL_TOTAL; i++) {
+                //   // await trainModel(largeModelArray[i], xs2, largeTensorArray[i]);
+                // }
+                //
+                // // console.log('Done second training model')
+                // // for (let i = 0; i < PIXEL_TOTAL; i++) {
+                // //   await largeModelArray[i].save(`file:///Users/magnusjohansson/Desktop/Node_Projects/xproto1/saved_models/model${i}`);
+                // // }
+                // pixelArray = [];
+                // for (let i = 0; i < PIXEL_TOTAL; i++) {
+                //   largeDataArray[i] = testModel(largeModelArray[i], dataTest);
+                //   pixelArray.push(largeDataArray[i]);
+                // }
+
+                // console.log(pixelArray);
+              }
+            })
           })
-        })
 
-        //console.log(batchImagesArray);
+          //console.log(batchImagesArray);
+          });
+    } else {
+      importantPrediction = data.percent8;
+      if (importantPrediction == 'Breathing') {
+        predictedValue = 2;
+      } else if (importantPrediction == 'Talking') {
+        predictedValue = 4;
+      } else if (importantPrediction == 'Blowing') {
+        predictedValue = 6;
+      } else if (importantPrediction == 'Coughing') {
+        predictedValue = 8;
+      } else if (importantPrediction == 'Sneezing') {
+        predictedValue = 10;
+      }
+      perc2 = data.percent2;
+      perc3 = data.percent3;
+      perc4 = data.percent4;
+      perc5 = data.percent5;
+      perc6 = data.p6;
+      response.json(data);
+      running();
+      async function running() {
+        let c = new Promise((resolve, reject) => {
+          database.find({}, function (err, data) {
+            if (err) throw err;
+            resolve(data);
+          });
+        }).then((dataReceive5) => {
+          getPictures(predictedValue, dataReceive5);
+          console.log('Done second prediction');
         });
+      }
+    }
 });
 
 app.get('/collect', (request, response) => {

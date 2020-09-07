@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <!-- <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -80,13 +80,15 @@
     <!--- Two Column Section -->
     <a id='can'>
     <div class='mainThing container-fluid'>
-      <h1 class='cough'>Why Do We Stand 6 Feet Apart?</h1>
-      <h3 class='cough'>Visualize Your Own Cough. Right Here.</h3>
-      <p class='cough'>Cough, sneeze, talk, blow, or breathe
+      <h1 id='intro1' class='cough'>Why Do We Stand 6 Feet Apart?</h1>
+      <h3 id='intro2' class='cough'>Visualize Your Own Cough. Right Here.</h3>
+      <p id='intro3' class='cough'>Cough, sneeze, talk, blow, or breathe
         into your microphone from 1 to 2 feet away to get an
         accurate visualization of your own cough and tons of
         data about it, including your chance of infecting
         others at different distances if you have the virus!</p>
+      <p id='caution' class='cough'>*If audio input is not possible, choose the manual
+      input option to see how different transmission modes compare*</p>
 
         <button id='toggle' class='starter btn btn-outline-secondary' data-toggle='collapse' data-target='#emoji'>
         Start</button>
@@ -204,6 +206,27 @@
           <form>
             <input type='text' id='input6'>
           </form>
+          <div id='onOff6' class='percent'>
+            <div class='selection'>
+              <select name='percent' id='percent7'>
+                <option disabled selected value>Select</option>
+                <option>Manual Input</option>
+                <option>Audio Input</option>
+              </select>
+            </div>
+           </div>
+           <div id='onOff7' class='percent'>
+             <div class='selection'>
+               <select name='percent' id='percent8'>
+                 <option disabled selected value>Select</option>
+                 <option>Breathing</option>
+                 <option>Talking</option>
+                 <option>Blowing</option>
+                 <option>Coughing</option>
+                 <option>Sneezing</option>
+               </select>
+             </div>
+            </div>
       <h3 id='here0' class='cough'>Prediction Survey</h3>
       <p id='here1'>If you were infected, what is the chance of your breathe, cough, or sneeze...</p>
       <p id='here2'>...spreading the virus at 3 feet?</p>
@@ -211,14 +234,18 @@
       <p id='here4'>...spreading the virus at 9 feet?</p>
       <p id='here5'>Your Age Group:</p>
       <p id='here6'>Your state within the United States or your country outside of the US:</p>
+      <p id='here7'>Choose between audio input (accessible only for certain devices) or manual input:</p>
+      <p id='here8'>Choose mode of transmission to visualize:</p>
+      <button id='manualSubmit' type='button' class='btn btn-outline-secondary'>Manual Submit</button>
       <script>
-        for (let i = 0; i <= 6; i++) {
+        for (let i = 0; i <= 8; i++) {
           document.getElementById(`here${i}`).style.display='none';
         }
-        for (let i = 2; i <= 5; i++) {
+        for (let i = 2; i <= 7; i++) {
           document.getElementById(`onOff${i}`).style.display='none';
         }
         document.getElementById('input6').style.display='none';
+        document.getElementById('manualSubmit').style.display='none';
       </script>
 
       <span id='moreContent'></span>
