@@ -93,10 +93,10 @@ let s1 = function(sketch){
   sketch.setup = function() {
     // let clientHeight = document.getElementById('mainContent').clientHeight;
     // console.log(clientHeight);
-    canvas1 = sketch.createCanvas(175, 175);
+    canvas1 = sketch.createCanvas(100, 100);
     canvas1.id('canvas1');
-    cHeight = 175;
-    cWidth = 175;
+    cHeight = 100;
+    cWidth = 100;
     // console.log(cWidth);
     // cHeight = canvas1.height;
     // cWidth = canvas1.width;
