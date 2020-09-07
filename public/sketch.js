@@ -463,7 +463,7 @@ function capture() {
       f32array = this.datasetImages;
 
       submit.addEventListener('click', async event => {
-        if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '' || percent8 == '') {
+        if (percent2 == '' || percent3 == '' || percent4 == '' || percent5 == '' || p6 == '' || percent7 == '') {
           alert('Please fill in the prediction survey!');
         } else {
           if (toggleValue) {
