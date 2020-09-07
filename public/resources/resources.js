@@ -1,7 +1,3 @@
-if (location.protocol !== 'https:') {
-    location.replace(`https:${location.href.substring(location.protocol.length)}`);
-}
-
 let value = false;
 let expand = 4; //expand = rez // change to based on window size
 let datas;
