@@ -23,7 +23,7 @@
     <nav class='navbar navbar-expand-md navbar-dark sticky-top'>
       <!-- can add sticky-top above^ -->
       <div class='container-fluid'>
-        <a class='navbar-brand' href='#'><img src='../img/mylogo3.png'></a>
+        <a class='navbar-brand' href='#'><img src='../img/vrtxlogo.png'></a>
         <button class='navbar-toggler' type='button' data-toggle='collapse'
         data-target='#navbarResponsive'>
           <span class='navbar-toggler-icon'></span>
@@ -37,14 +37,14 @@
               <a class='nav-link' href='/about'>About</a>
             </li>
             <li class='nav-item'>
-              <a id='lock' class='nav-link' href='/learning'>Learning</a>
+              <a id='lock' class='nav-link' href='https://www.vrtxbio.com/about-us'>Vrtx Bio</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <!--- Image Slider -->
-    <div id='slides' class='carousel slide' data-ride='carousel'>
+    <!-- <div id='slides' class='carousel slide' data-ride='carousel'>
     <ul class='carousel-indicators'>
       <li data-target='#slides' data-slide-to='0' class='active'></li>
       <li data-target='#slides' data-slide-to='1'></li>
@@ -56,11 +56,11 @@
         <div class='carousel-caption'>
           <h1 class='display-2' style="color: #a8feff;">Spread Less</h1>
           <h3>Be Mindful of Your Cough</h3>
-          <!-- <a href='#can'>
+          <! <a href='#can'>
           <button type='button' class='btn btn-outline-light btn-lg'>
           VIEW DEMO</button>
           </a> -->
-          <a href='#can'>
+          <!-- <a href='#can'>
           <button type='button' class='btn btn-primary btn-lg'>
           Get Started</button>
           </a>
@@ -75,7 +75,7 @@
     </div>
     </div>
 
-    <canvas id='myCanvas'></canvas>
+    <canvas id='myCanvas'></canvas> -->
 
     <!--- Two Column Section -->
     <a id='can'>
@@ -234,6 +234,7 @@
       <p id='here4'>...spreading the virus at 9 feet?</p>
       <p id='here5'>Your Age Group:</p>
       <p id='here6'>Your state within the United States or your country outside of the US:</p>
+      <p class='here' id='here6_5'>---------------------------------------------------------------------------------</p>
       <p id='here7'>Choose between audio input (accessible only for certain devices) or manual input:</p>
       <p id='here8'>Choose mode of transmission to visualize:</p>
       <button id='manualSubmit' type='button' class='btn btn-outline-secondary'>Manual Submit</button>
@@ -244,6 +245,7 @@
         for (let i = 2; i <= 7; i++) {
           document.getElementById(`onOff${i}`).style.display='none';
         }
+        document.getElementById('here6_5').style.display='none';
         document.getElementById('input6').style.display='none';
         document.getElementById('manualSubmit').style.display='none';
       </script>
@@ -255,7 +257,7 @@
 
     <!--- Emoji Section -->
     <hr class='my-4'>
-    </div>
+    <!-- </div>
     <div class='info container'>
         <h1 class='cough'>Cough Info</h1>
         <p class='cough'>This graph illustrates the density trend
@@ -303,8 +305,8 @@
             spread of the virus and we may not want to take
             social distancing rules seriously, but I hope
             this site can show its importance and answer
-            the question: Why do we stand 6 feet apart?</p>
-    <script src="demo.js"></script>
+            the question: Why do we stand 6 feet apart?</p> -->
+    <!-- <script src="demo.js"></script> -->
     <script src="sketch.js"></script>
 
   </body>

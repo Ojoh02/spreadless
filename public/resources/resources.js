@@ -236,6 +236,7 @@ let s1 = async function(sketch) {
       }
       largeArray.push(mediumArray);
     }
+    let trying = 0;
     let densityMax = 0;
     let findMax = 0;
     let findMin = 200;
@@ -251,6 +252,7 @@ let s1 = async function(sketch) {
     let offset0 = 0, offset1 = 0, offset2 = 0, offset3 = 0, offset4 = 0;
     let diff0 = 0, diff1 = 0, diff2 = 0, diff3 = 0, diff4 = 0, diff5 = 0, diff6 = 0, diff7 = 0, diff8 = 0, diff9 = 0;
     let i0 = 0, i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0, i8 = 0, i9 = 0;
+    console.log(largeArray);
     for (let i = 0; i < largeArray.length; i++) {
       densityMax = 0;
       avgNumber = 0;
@@ -390,6 +392,8 @@ let s1 = async function(sketch) {
             cot2++
           } else if (index4 < 3) {
             tot3 += smAry[2];
+            console.log(tot3);
+            console.log(trying++);
           } else if (index4 < 4) {
             tot4 += smAry[2];
           } else if (index4 < 5) {
@@ -500,6 +504,8 @@ let s1 = async function(sketch) {
     graph6.push(tot7/90/60);
     graph6.push(tot8/90/60);
     graph6.push(tot9/90/60);
+    console.log(tot3/120/48);
+    console.log(tot3/90/60);
     feet3 = Math.round(tot3/90/60*100)/100;
     feet6 = Math.round(tot6/90/60*100)/100;
     feet9 = Math.round(tot9/90/60*100)/100;

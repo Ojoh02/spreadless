@@ -28,6 +28,7 @@ let here3 = document.getElementById('here3');
 let here4 = document.getElementById('here4');
 let here5 = document.getElementById('here5');
 let here6 = document.getElementById('here6');
+let here6_5 = document.getElementById('here6_5');
 let here7 = document.getElementById('here7');
 let here8 = document.getElementById('here8');
 
@@ -270,6 +271,7 @@ function toggle() {
   here4.style.display='block';
   here5.style.display='block';
   here6.style.display='block';
+  here6_5.style.display='block';
   here7.style.display='block';
 
   onOff2.style.display='block';
